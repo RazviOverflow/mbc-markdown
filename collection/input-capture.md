@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.1</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,14 +21,14 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>27 April 2024</b></td>
 </tr>
 </table>
 
 
 # Input Capture
 
-Malware captures user input.
+Malware may record user inputs, typically without the user's knowledge. This is often used to capture sensitive information such as usernames, passwords, credit card numbers, and other personal data. The most common form of input capture is keylogging, where the malware records every keystroke made on a device. However, it can also involve capturing mouse clicks, touch screen interactions, or even voice inputs. The captured data is then usually transmitted to the attacker for use in further malicious activities like identity theft or unauthorized access.
 
 See ATT&CK: **Input Capture ([T1056](https://attack.mitre.org/techniques/T1056), [T1417](https://attack.mitre.org/techniques/T1417/))**.
 
@@ -52,7 +52,13 @@ See ATT&CK: **Input Capture ([T1056](https://attack.mitre.org/techniques/T1056),
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[use .NET library SharpClipboard](https://github.com/mandiant/capa-rules/blob/master/collection/use-dotnet-library-sharpclipboard.yml)|Input Capture (E1056)| |
+|[use .NET library SharpClipboard](https://github.com/mandiant/capa-rules/blob/master/collection/use-dotnet-library-sharpclipboard.yml)|Input Capture (E1056)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Input Capture (E1056)|SetWindowsHookExA, SetWindowsHookExW|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Input Capture::Mouse Events (E1056.m01)|SetWindowsHookExA, SetWindowsHookExW|
+|[browser_scanbox](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/browser_scanbox.py)|Input Capture (E1056)|JsEval, COleScript_ParseScriptText, COleScript_Compile|
 
 ## References
 

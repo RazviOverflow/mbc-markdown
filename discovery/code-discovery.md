@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>29 April 2024</b></td>
 </tr>
 </table>
 
@@ -49,7 +49,7 @@ Malware may inspect code or enumerate aspects.
 |[**Gamut**](../xample-malware/gamut.md)|2014|B0046.001|Gamut enumerates PE sections. [[1]](#1)|
 |[**Hupigon**](../xample-malware/hupigon.md)|2013|B0046.001|Hupigon enumerates PE sections. [[1]](#1)|
 |[**Locky Bart**](../xample-malware/locky-bart.md)|2017|B0046.001|Locky Bart enumerates PE sections. [[1]](#1)|
-|[**Redhip**](../xample-malware/rebhip.md)|2011|B0046.002|Redhip inspects section memory permissions. [[1]](#1)|
+|[**Redhip**](../xample-malware/redhip.md)|2011|B0046.002|Redhip inspects section memory permissions. [[1]](#1)|
 |[**Stuxnet**](../xample-malware/stuxnet.md)|2010|B0046.001|Stuxnet enumerates PE sections. [[1]](#1)|
 |[**TrickBot**](../xample-malware/trickbot.md)|2016|B0046.002|TrickBot inspects section memory permissions. [[1]](#1)|
 |[**Ursnif**](../xample-malware/ursnif.md)|2016|B0046.001|Ursnif enumerates PE sections. [[1]](#1)|
@@ -58,8 +58,8 @@ Malware may inspect code or enumerate aspects.
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[enumerate PE sections](https://github.com/mandiant/capa-rules/blob/master/load-code/pe/enumerate-pe-sections.yml)|Code Discovery::Enumerate PE Sections (B0046.001)| |
-|[inspect section memory permissions](https://github.com/mandiant/capa-rules/blob/master/load-code/pe/inspect-section-memory-permissions.yml)|Code Discovery::Inspect Section Memory Permissions (B0046.002)| |
+|[enumerate PE sections](https://github.com/mandiant/capa-rules/blob/master/load-code/pe/enumerate-pe-sections.yml)|Code Discovery::Enumerate PE Sections (B0046.001)|--|
+|[inspect section memory permissions](https://github.com/mandiant/capa-rules/blob/master/load-code/pe/inspect-section-memory-permissions.yml)|Code Discovery::Inspect Section Memory Permissions (B0046.002)|--|
 
 ## References
 

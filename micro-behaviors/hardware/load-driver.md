@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -41,3 +41,7 @@ Malware loads a device driver or minifilter.
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[start minifilter driver](https://github.com/mandiant/capa-rules/blob/master/host-interaction/filter/start-minifilter-driver.yml)|Load Driver::Minifilter (C0023.001)|FltStartFiltering|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[driver_load](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/driver_load.py)|DriverLoad|Load Driver (C0023)|NtLoadDriver|

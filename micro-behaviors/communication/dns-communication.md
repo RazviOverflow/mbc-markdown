@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>29 April 2024</b></td>
 </tr>
 </table>
 
@@ -44,15 +44,37 @@ The DNS Communication micro-behavior focuses on DNS communication.
 
 |Name|Date|Method|Description|
 |---|---|---|---|
-|[**Hupigon**](../xample-malware/hupigon.md)|2013|C0011.001|Hupigon resolves DNS. [[1]](#1)|
-|[**Shamoon**](../xample-malware/shamoon.md)|2012|C0011.001|Shamoon resolves DNS. [[1]](#1)|
+|[**Hupigon**](../../xample-malware/hupigon.md)|2013|C0011.001|Hupigon resolves DNS. [[1]](#1)|
+|[**Shamoon**](../../xample-malware/shamoon.md)|2012|C0011.001|Shamoon resolves DNS. [[1]](#1)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[reference DNS over HTTPS endpoints](https://github.com/mandiant/capa-rules/blob/master/communication/dns/reference-dns-over-https-endpoints.yml)|DNS Communication::Server Connect (C0011.002)| |
-|[resolve DNS](https://github.com/mandiant/capa-rules/blob/master/communication/dns/resolve-dns.yml)|DNS Communication::Resolve (C0011.001)|ws2_32.gethostbyname, DnsQuery_A, DnsQuery_W, DnsQuery_UTF8, DnsQueryEx, getaddrinfo, GetAddrInfo, GetAddrInfoEx, gethostbyname, getaddrinfo, getnameinfo, gethostent, System.Net.Dns::GetHostAddresses|
+|[reference DNS over HTTPS endpoints](https://github.com/mandiant/capa-rules/blob/master/communication/dns/reference-dns-over-https-endpoints.yml)|DNS Communication::Server Connect (C0011.002)|--|
+|[resolve DNS](https://github.com/mandiant/capa-rules/blob/master/communication/dns/resolve-dns.yml)|DNS Communication::Resolve (C0011.001)|ws2_32.gethostbyname, DnsQuery_A, DnsQuery_W, DnsQuery_UTF8, DnsQueryEx, GetAddrInfo, GetAddrInfoW, GetAddrInfoEx, gethostbyname, getaddrinfo, getnameinfo, gethostent, System.Net.Dns::GetHostAddresses|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[network_dns_blockchain](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSBlockChain|DNS Communication (C0011)|--|
+|[network_dns_idn](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSIDN|DNS Communication (C0011)|DnsQueryA|
+|[network_dns_opennic](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSOpenNIC|DNS Communication (C0011)|--|
+|[network_dns_reverse_proxy](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSReverseProxy|DNS Communication (C0011)|--|
+|[network_dns_suspicious_querytype](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSSuspiciousQueryType|DNS Communication (C0011)|DnsQueryA|
+|[network_dns_tunneling_request](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDNSTunnelingRequest|DNS Communication (C0011)|DnsQuery_A, DnsQuery_W|
+|[network_dns_doh_tls](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_dns_suspicious.py)|NetworkDOHTLS|DNS Communication (C0011)|--|
+|[network_dga](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_dga.py)|NetworkDGA|DNS Communication (C0011)| --|
+
+### C0011.001 Snippet
+<details>
+<summary> Communication::DNS Communication::Resolve </summary>
+SHA256: 000b535ab2a4fec86e2d8254f8ed65c6ebd37309ed68692c929f8f93a99233f6
+Location: 0x472CD3
+<pre>
+push    ebx     ; hostname to perform DNS lookup for
+call    WSOCK32.DLL::gethostbyname      ; Windows function which will retrieve an object representing the specified host
+</pre>
+</details>
 
 ## References
 

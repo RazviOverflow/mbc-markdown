@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>1 March 2023</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -36,3 +36,10 @@ This micro-behavior focuses on SMTP communication.
 |---|---|---|
 |**Request**|C0012.002|Makes SMTP request.|
 |**Server Connect**|C0012.001|Connects to an SMTP server.|
+
+## Detection
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[network_smtp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_smtp.py)|NetworkSMTP|SMTP Communication (C0012)|--|
+

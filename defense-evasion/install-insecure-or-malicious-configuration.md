@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>3.0</b></td>
+<td><b>3.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>4 March 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -37,6 +37,18 @@ Malware may install malicious configuration settings or may modify existing conf
 |[**Black Energy**](../xample-malware/blackenergy.md)|2007|--|Malware configures the system to the TESTSIGNING boot configuration option to load its unsigned driver component. [[1]](#1)|
 |[**YiSpecter**](../xample-malware/yispecter.md)|2015|--|The malware changes iOS Safari's default configuration. [[2]](#2)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[bcdedit_command](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bcdedit_command.py)|Install Insecure or Malicious Configuration (B0047)|ShellExecuteExW, NtCreateUserProcess, CreateProcessInternalW|
+|[stealth_hidden_extension](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenextension.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[stealth_hiddenreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenreg.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[stealth_hide_notifications](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hidenotifications.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[disables_app_launch](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_app.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[modify_hostfile](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/modifies_hostsfile.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[antiav_srp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_srp.py)|Install Insecure or Malicious Configuration (B0047)|--|
+|[bypass_firewall](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bypass_firewall.py)|Install Insecure or Malicious Configuration (B0047)|--|
 
 ## References
 

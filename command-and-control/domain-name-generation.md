@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>15 March 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -43,6 +43,13 @@ This behavior is related to Unprotect technique U0906.
 |[**CryptoLocker**](../xample-malware/cryptolocker.md)|2013|--|The malware uses an internal domain generation algorithm. [[4]](#4)|
 |[**Ursnif**](../xample-malware/ursnif.md)|2016|--|Previous interations of Ursnif have used a Domain Name Generation algorithm. [[5]](#5)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[whois_create](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/whois_create.py)|Domain Name Generation (B0031)|--|
+|[network_dga](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_dga.py)|Domain Name Generation (B0031)|--|
+|[network_dga_fraunhofer](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_dga_fraunhofer.py)|Domain Name Generation (B0031)|--|
 
 ## References
 

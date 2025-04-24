@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>17 August 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
@@ -44,6 +44,15 @@ The related **Network Denial of Service ([T1498](https://attack.mitre.org/techni
 |---|---|---|---|
 |[**BlackEnergy**](../xample-malware/blackenergy.md)|2007|--|BlackEnergy launches distributed denial of service attacks that can target more than one IP address per hostname. [[1]](#1)|
 |[**GoBotKR**](../xample-malware/gobotkr.md)|2019|--|GoBotKR has been used to execute endpoint DDoS attacks – for example, TCP Flood or SYN Flood. [[2]](#2)|
+
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[cve_2016_7200](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/cve_2016_7200.py)|Denial of Service (B0033)|JsEval, COleScript_ParseScriptText, COleScript_Compile|
+|[network_cnc_http](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_cnc_http.py)|Denial of Service (B0033)|--|
+|[cve_2015_2419_js](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/cve_2015_2419.py)|Denial of Service (B0033)|JsEval, COleScript_ParseScriptText, COleScript_Compile|
+|[cve_2016-0189](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/cve_2016-0189.py)|Denial of Service (B0033)|JsEval, COleScript_ParseScriptText, COleScript_Compile|
 
 ## References
 

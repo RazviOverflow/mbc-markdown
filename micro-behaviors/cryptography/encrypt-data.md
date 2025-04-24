@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>6 February 2024</b></td>
 </tr>
 </table>
 
@@ -49,26 +49,25 @@ Malware may encrypt data.
 |**Stream Cipher**|C0027.012|Malware encrypts with a stream cipher.|
 |**Twofish**|C0027.005|Malware encrypts with the Twofish algorithm.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
 |[**TrickBot**](../../xample-malware/trickbot.md)|2016|C0027.001|The malware uses an AES CBC (256 bits) encryption algorithm for its loader and configuration files. [[1]](#1)|
-|[**Emotet**](../xample-malware/emotet.md)|2018|C0027.009|Emotet encrypts data using RC4 PRGA. [[8]](#8)|
+|[**Emotet**](../../xample-malware/emotet.md)|2018|C0027.009|Emotet encrypts data using RC4 PRGA. [[8]](#8)|
 |[**Emotet**](../../xample-malware/emotet.md)|2018|C0027.011|Emotet uses RSA to encrypt network traffic to its C2. [[2]](#2)|
 |[**GravityRAT**](../../xample-malware/gravity-rat.md)|2018|C0027.001|GravityRat v3 supports file AES file encryption. [[3]](#3)|
 |[**Poison Ivy**](../../xample-malware/poison-ivy.md)|2005|C0027.003|Poison Ivy's custom network protocol over TCP is encrypted using Camellia cipher with a 256-bit key. [[4]](#4)|
-|[**CHOPSTICK**](../xample-malware/chopstick.md)|2015|C0027.009|CHOPSTICK encrypts the configuration block using RC4 encryption. [[5]](#5)|
-|[**Matanbuchus**](../xample-malware/matanbuchus.md)|2021|C0027.009|The malware decrypts inner configurations stored in the binary. The malware also encrypts the value of each JSON key with RC4 and encodes the value with Base64. [[6]](#6) [[7]](#7)|
-|[**BlackEnergy**](../xample-malware/blackenergy.md)|2007|C0027.009|BlackEnergy encrypts data using RC4 via WinAPI. [[8]](#8)|
-|[**Dark Comet**](../xample-malware/dark-comet.md)|2008|C0027.009|Dark Comet encrypts data using RC4 PRGA. [[8]](#8)|
-|[**DNSChanger**](../xample-malware/dnschanger.md)|2011|C0027.009|DNSChanger encrypts data using RC4 PRGA. [[8]](#8)|
-|[**Hupigon**](../xample-malware/hupigon.md)|2013|C0027.004|Hupigon encrypts data using DES. [[8]](#8)|
-|[**Kraken**](../xample-malware/kraken.md)|2008|C0027.009|Kraken encrypts data using RC4 PRGA. [[8]](#8)|
-|[**Locky Bart**](../xample-malware/locky-bart.md)|2017|C0027.009|Locky Bart encrypts data using RC4 PRGA. [[8]](#8)|
-|[**Redhip**](../xample-malware/rebhip.md)|2011|--|Redhip encrypts data using DPAPI. [[8]](#8)|
-|[**Rombertik**](../xample-malware/rombertik.md)|2015|C0027.009|Rombertik encrypts data using RC4 PRGA. [[8]](#8)|
+|[**CHOPSTICK**](../../xample-malware/chopstick.md)|2015|C0027.009|CHOPSTICK encrypts the configuration block using RC4 encryption. [[5]](#5)|
+|[**Matanbuchus**](../../xample-malware/matanbuchus.md)|2021|C0027.009|The malware decrypts inner configurations stored in the binary. The malware also encrypts the value of each JSON key with RC4 and encodes the value with Base64. [[6]](#6) [[7]](#7)|
+|[**BlackEnergy**](../../xample-malware/blackenergy.md)|2007|C0027.009|BlackEnergy encrypts data using RC4 via WinAPI. [[8]](#8)|
+|[**Dark Comet**](../../xample-malware/dark-comet.md)|2008|C0027.009|Dark Comet encrypts data using RC4 PRGA. [[8]](#8)|
+|[**DNSChanger**](../../xample-malware/dnschanger.md)|2011|C0027.009|DNSChanger encrypts data using RC4 PRGA. [[8]](#8)|
+|[**Hupigon**](../../xample-malware/hupigon.md)|2013|C0027.004|Hupigon encrypts data using DES. [[8]](#8)|
+|[**Kraken**](../../xample-malware/kraken.md)|2008|C0027.009|Kraken encrypts data using RC4 PRGA. [[8]](#8)|
+|[**Locky Bart**](../../xample-malware/locky-bart.md)|2017|C0027.009|Locky Bart encrypts data using RC4 PRGA. [[8]](#8)|
+|[**Redhip**](../../xample-malware/redhip.md)|2011|--|Redhip encrypts data using DPAPI. [[8]](#8)|
+|[**Rombertik**](../../xample-malware/rombertik.md)|2015|C0027.009|Rombertik encrypts data using RC4 PRGA. [[8]](#8)|
 
 ## Detection
 
@@ -76,26 +75,39 @@ Malware may encrypt data.
 |---|---|---|
 |[encrypt or decrypt via WinCrypt](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/encrypt-or-decrypt-via-wincrypt.yml)|Encrypt Data (C0027)|CryptEncrypt, CryptDecrypt, CryptAcquireContext, CryptGenKey, CryptImportKey|
 |[encrypt data using memfrob from glibc](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/encrypt-data-using-memfrob-from-glibc.yml)|Encrypt Data (C0027)|memfrob|
-|[encrypt data using HC-128](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/hc-128/encrypt-data-using-hc-128.yml)|Encrypt Data::HC-128 (C0027.006)| |
-|[encrypt data using HC-128 via WolfSSL](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/hc-128/encrypt-data-using-hc-128-via-wolfssl.yml)|Encrypt Data::HC-128 (C0027.006)| |
-|[encrypt data using RC6](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc6/encrypt-data-using-rc6.yml)|Encrypt Data::RC6 (C0027.010)| |
-|[encrypt data using twofish](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/twofish/encrypt-data-using-twofish.yml)|Encrypt Data::Twofish (C0027.005)| |
-|[encrypt data using AES MixColumns step](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/encrypt-data-using-aes-mixcolumns-step.yml)|Encrypt Data::AES (C0027.001)| |
+|[encrypt data using HC-128](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/hc-128/encrypt-data-using-hc-128.yml)|Encrypt Data::HC-128 (C0027.006)|--|
+|[encrypt data using HC-128 via WolfSSL](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/hc-128/encrypt-data-using-hc-128-via-wolfssl.yml)|Encrypt Data::HC-128 (C0027.006)|--|
+|[encrypt data using RC6](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc6/encrypt-data-using-rc6.yml)|Encrypt Data::RC6 (C0027.010)|--|
+|[encrypt data using twofish](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/twofish/encrypt-data-using-twofish.yml)|Encrypt Data::Twofish (C0027.005)|--|
+|[encrypt data using AES MixColumns step](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/encrypt-data-using-aes-mixcolumns-step.yml)|Encrypt Data::AES (C0027.001)|--|
 |[encrypt data using AES via WinAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/encrypt-data-using-aes-via-winapi.yml)|Encrypt Data::AES (C0027.001)|CryptGenKey, CryptDeriveKey, CryptImportKey, CryptAcquireContext, CryptEncrypt, CryptDecrypt|
-|[encrypt data using AES via .NET](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/encrypt-data-using-aes-via-dotnet.yml)|Encrypt Data::AES (C0027.001)| |
-|[manually build AES constants](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/manually-build-aes-constants.yml)|Encrypt Data::AES (C0027.001)| |
-|[encrypt data using Sosemanuk](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/sosemanuk/encrypt-data-using-sosemanuk.yml)|Encrypt Data::Sosemanuk (C0027.008)| |
-|[encrypt data using Camellia](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/camellia/encrypt-data-using-camellia.yml)|Encrypt Data::Camellia (C0027.003)| |
-|[encrypt data using vest](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/vest/encrypt-data-using-vest.yml)|Encrypt Data (C0027)| |
-|[encrypt data using DPAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/dpapi/encrypt-data-using-dpapi.yml)|Encrypt Data (C0027)|CryptProtectMemory, CryptUnprotectMemory, crypt32.CryptProtectData, crypt32.CryptUnprotectData, System.Security.Cryptography.ProtectedData::Unprotect, System.Security.Cryptography.ProtectedData::Protect|
-|[encrypt data using DES](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/des/encrypt-data-using-des.yml)|Encrypt Data::3DES (C0027.004)| |
+|[encrypt data using AES via .NET](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/encrypt-data-using-aes-via-dotnet.yml)|Encrypt Data::AES (C0027.001)|--|
+|[manually build AES constants](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/manually-build-aes-constants.yml)|Encrypt Data::AES (C0027.001)|--|
+|[encrypt data using Sosemanuk](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/sosemanuk/encrypt-data-using-sosemanuk.yml)|Encrypt Data::Sosemanuk (C0027.008)|--|
+|[encrypt data using Camellia](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/camellia/encrypt-data-using-camellia.yml)|Encrypt Data::Camellia (C0027.003)|--|
+|[encrypt data using vest](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/vest/encrypt-data-using-vest.yml)|Encrypt Data (C0027)|--|
+|[encrypt data using DPAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/dpapi/encrypt-data-using-dpapi.yml)|Encrypt Data (C0027)|CryptProtectMemory, CryptUnprotectMemory, crypt32.CryptProtectData, crypt32.CryptUnprotectData, System.Security.Cryptography.ProtectedData::Unprotect, System.Security.Cryptography.ProtectedData::Protect, SystemFunction040, SystemFunction041|
+|[encrypt data using DES](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/des/encrypt-data-using-des.yml)|Encrypt Data::3DES (C0027.004)|--|
 |[encrypt data using DES via WinAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/des/encrypt-data-using-des-via-winapi.yml)|Encrypt Data::3DES (C0027.004)|CryptGenKey, CryptDeriveKey, CryptImportKey, CryptAcquireContext, CryptEncrypt, CryptDecrypt|
-|[encrypt data using RC4 PRGA](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-prga.yml)|Encrypt Data::RC4 (C0027.009)| |
+|[encrypt data using RC4 PRGA](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-prga.yml)|Encrypt Data::RC4 (C0027.009)|--|
 |[encrypt data using RC4 with custom key via WinAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-with-custom-key-via-winapi.yml)|Encrypt Data::RC4 (C0027.009)|CryptImportKey, CryptAcquireContext, CryptEncrypt|
 |[encrypt data using RC4 via WinAPI](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-via-winapi.yml)|Encrypt Data::RC4 (C0027.009)|CryptGenKey, CryptDeriveKey, CryptImportKey, CryptAcquireContext, CryptEncrypt, CryptDecrypt|
-|[encrypt data using RC4 KSA](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml)|Encrypt Data::RC4 (C0027.009)| |
-|[encrypt data using skipjack](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/skipjack/encrypt-data-using-skipjack.yml)|Encrypt Data::Skipjack (C0027.013)| |
-|[encrypt data using blowfish](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/blowfish/encrypt-data-using-blowfish.yml)|Encrypt Data::Blowfish (C0027.002)| |
+|[encrypt data using RC4 KSA](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/rc4/encrypt-data-using-rc4-ksa.yml)|Encrypt Data::RC4 (C0027.009)|--|
+|[encrypt data using skipjack](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/skipjack/encrypt-data-using-skipjack.yml)|Encrypt Data::Skipjack (C0027.013)|--|
+|[encrypt data using blowfish](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/blowfish/encrypt-data-using-blowfish.yml)|Encrypt Data::Blowfish (C0027.002)|--|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[mass_data_encryption](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/ransomware_crypto.py)|MassDataEncryption|Encrypt Data (C0027)|CryptEncrypt|
+|[encrypt_data_agenttesla](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/malware_data_encryption.py)|EnryptDataAgentTeslaHTTP|Encrypt Data (C0027)|CryptEncrypt|
+|[encrypt_data_agentteslat2_http](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/malware_data_encryption.py)|EnryptDataAgentTeslaHTTPT2|Encrypt Data (C0027)|CryptEncrypt, GetComputerNameW, GetUserNameW|
+|[encrypt_data_nanocore](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/malware_data_encryption.py)|EnryptDataNanoCore|Encrypt Data (C0027)|CryptEncrypt, GetComputerNameW, GetUserNameW|
+|[dcrat_behavior](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/rat_dcrat.py)|DCRatAPIs|Encrypt Data (C0027)|CryptHashData|
+|[rat_nanocore](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/rat_nanocore.py)|NanocoreRAT|Encrypt Data (C0027)|CryptHashData|
+|[rat_luminosity](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/rat_luminosity.py)|LuminosityRAT|Encrypt Data (C0027)|CryptHashData|
+|[script_network_activity](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/script_downloader.py)|ScriptNetworkActvity|Encrypt Data (C0027)|SslEncryptPacket|
+|[ransomware_file_modifications](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/ransomware_filemodifications.py)|RansomwareFileModifications|Encrypt Data (C0027)|--|
+|[blackrat_apis](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/rat_blackremote.py)|BlackRATAPIs|Encrypt Data (C0027)|CryptHashData|
 
 ## Code Snippets
 
@@ -155,7 +167,6 @@ retn
 </pre>
 </details>
 
-
 ## References
 
 <a name="1">[1]</a> https://www.securityartwork.es/wp-content/uploads/2017/07/Trickbot-report-S2-Grupo.pdf
@@ -166,7 +177,7 @@ retn
 
 <a name="4">[4]</a> https://www.mandiant.com/sites/default/files/2021-09/rpt-poison-ivy.pdf
 
-<a name="5">[5]</a> https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
+<a name="5">[5]</a> https://web.archive.org/web/20210307034415/https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
 
 <a name="6">[6]</a> https://www.0ffset.net/reverse-engineering/matanbuchus-loader-analysis/
 

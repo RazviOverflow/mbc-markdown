@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.1</b></td>
+<td><b>2.4</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,14 +21,14 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>12 June 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
 
 # Hidden Files and Directories
 
-Malware may hide files and folders to avoid detection and/or to persist on the system. See potential methods below. 
+Malware may hide files and folders to avoid detection and/or to persist on the system. See potential methods below. This is achieved by marking files or directories as hidden or by using special characters in file names to prevent them from being displayed in standard directory listings. By hiding files or directories, malware can evade detection from users and some security software.
 
 This behavior is related to Unprotect technique U1230.
 
@@ -43,7 +43,6 @@ See ATT&CK: **Hide Artifacts: Hidden Files and Directories ([T1564.001](https://
 |**Location**|F0005.002|Malware may change or choose the location of itself, another file, or a directory to prevent detection.|
 |**Timestamp**|F0005.004|Malware may change the timestamp on a file to prevent detection.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
@@ -56,6 +55,17 @@ See ATT&CK: **Hide Artifacts: Hidden Files and Directories ([T1564.001](https://
 |[**Matanbuchus**](../xample-malware/matanbuchus.md)|2021|F0005.001|The malware also appends the filename and extension .ocx to the ProgramData folder path. [[5]](#5) [[6]](#6)|
 |[**WannaCry**](../xample-malware/wannacry.md)|2017|F0005.003|WannaCry uses the +h attribute to hide its files. [[7]](#7)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[spoofs_procname](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/spoofs_procname.py)|Hidden Files and Directories (F0005)|--|
+|[spoofs_procname](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/spoofs_procname.py)|Hidden Files and Directories::Location (F0005.002)|--|
+|[pe_compile_timestomping](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/static_pe_anomaly.py)|Hidden Files and Directories (F0005)|--|
+|[pe_compile_timestomping](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/static_pe_anomaly.py)|Hidden Files and Directories::Timestamp (F0005.004)|--|
+|[stealth_hidden_extension](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenextension.py)|Hidden Files and Directories (F0005)|--|
+|[stealth_hiddenreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenreg.py)|Hidden Files and Directories (F0005)|--|
+|[stealth_file](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_file.py)|Hidden Files and Directories (F0005)|NtSetInformationFile, NtClose, NtCreateFile, NtDuplicateObject, NtOpenFile|
 
 ## References
 
@@ -63,7 +73,7 @@ See ATT&CK: **Hide Artifacts: Hidden Files and Directories ([T1564.001](https://
 
 <a name="2">[2]</a> https://www.mcafee.com/blogs/other-blogs/mcafee-labs/shamoon-returns-to-wipe-systems-in-middle-east-europe/
 
-<a name="3">[3]</a> https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
+<a name="3">[3]</a> https://web.archive.org/web/20210307034415/https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
 
 <a name="4">[4]</a> https://securitynews.sonicwall.com/xmlpost/revisiting-vobfus-worm-mar-8-2013/
 

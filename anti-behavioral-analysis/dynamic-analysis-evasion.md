@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>27 April 2024</b></td>
 </tr>
 </table>
 
@@ -34,12 +34,7 @@
 
 Malware may obstruct dynamic analysis in a sandbox or virtual machine. An analyst detonates the specimen in these controlled environments to understand the malware's behavior. However, the code may exhibit a variety of anti-analysis methods, including delayed execution and code integrity checks. Additional methods are listed in the table below.
 
-See Emulator Evasion (B0004) for an emulator-specific evasion behavior. See Conditional Execution (B0025) for a behavior that constrains dynamic execution based on environmental conditions.
-
-The related Virtualization/Sandbox Evasion (T1497, T1633) ATT&CK techniques were defined subsequent to this MBC behavior.
-
-
-See **Emulator Evasion ([B0004](../anti-behavioral-analysis/emulator-evasion.md))** for an emulator-specific evasion behavior, and see **Conditional Execution ([B0025](../anti-behavioral-analysis/execution-guardrails.md))** for a behavior that constrains dynamic execution based on environmental conditions. 
+See **Emulator Evasion ([B0004](../anti-behavioral-analysis/emulator-evasion.md))** for an emulator-specific evasion behavior, and see **Conditional Execution ([B0025](../execution/conditional-execution.md))** for a behavior that constrains dynamic execution based on environmental conditions. 
 
 The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/techniques/T1497/), [T1633](https://attack.mitre.org/techniques/T1633/))** ATT&CK techniques were defined subsequent to this MBC behavior.
 
@@ -77,6 +72,29 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[delay execution](https://github.com/mandiant/capa-rules/blob/master/lib/delay-execution.yml)|Dynamic Analysis Evasion::Delayed Execution (B0003.003)|kernel32.Sleep, kernel32.SleepEx, kernel32.WaitForSingleObject, kernel32.SignalObjectAndWait, kernel32.WaitForSingleObjectEx, kernel32.WaitForMultipleObjects, kernel32.WaitForMultipleObjectsEx, kernel32.RegisterWaitForSingleObject, WaitOnAddress, user32.MsgWaitForMultipleObjects, user32.MsgWaitForMultipleObjectsEx, NtDelayExecution, KeWaitForSingleObject, KeDelayExecutionThread, sleep, usleep|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[api_spamming](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/api_spamming.py)|Dynamic Analysis Evasion (B0003)|--|
+|[api_spamming](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/api_spamming.py)|Dynamic Analysis Evasion::Data Flood (B0003.002)|--|
+|[api_spamming](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/api_spamming.py)|Dynamic Analysis Evasion::Delayed Execution (B0003.003)|--|
+|[antisandbox_suspend](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_suspend.py)|Dynamic Analysis Evasion (B0003)|NtSuspendThread|
+|[antisandbox_restart](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_restart.py)|Dynamic Analysis Evasion (B0003)|ExitWindowsEx, InitiateSystemShutdownExW, NtSetSystemPowerState, InitiateSystemShutdownW, InitiateShutdownW, NtRaiseHardError, NtShutdownSystem|
+|[antisandbox_restart](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_restart.py)|Dynamic Analysis Evasion::Restart (B0003.010)|ExitWindowsEx, InitiateSystemShutdownExW, NtSetSystemPowerState, InitiateSystemShutdownW, InitiateShutdownW, NtRaiseHardError, NtShutdownSystem|
+|[stealth_timeout](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_timelimit.py)|Dynamic Analysis Evasion (B0003)|NtWaitForSingleObject, NtQuerySystemTime, NtTerminateProcess, GetLocalTime, NtDelayExecution, GetSystemTime, GetSystemTimeAsFileTime|
+|[stealth_timeout](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_timelimit.py)|Dynamic Analysis Evasion::Delayed Execution (B0003.003)|NtWaitForSingleObject, NtQuerySystemTime, NtTerminateProcess, GetLocalTime, NtDelayExecution, GetSystemTime, GetSystemTimeAsFileTime|
+|[antisandbox_unhook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_unhook.py)|Dynamic Analysis Evasion (B0003)|--|
+
+### B0003.003 Snippet
+<details>
+<summary> Anti-Behavioral Analysis::Dynamic Analysis Evasion::Delayed Execution </summary>
+SHA256: 21c1fdd6cfd8ec3ffe3e922f944424b543643dbdab99fa731556f8805b0d5561
+Location: 0x40103B
+<pre>
+push    0x36ee80        ; sleep duration: 3600000 milliseconds (1 hour)
+call    dword ptr [->KERNEL32.DLL::Sleep]       ; Windows API call instructing thread to sleep for the time period specified above
+</pre>
+</details>
 
 ## References
 

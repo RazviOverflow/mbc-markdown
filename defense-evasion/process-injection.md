@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -67,7 +67,7 @@ The methods table includes existing ATT&CK sub-techniques, which have been enhan
 |[**Stuxnet**](../xample-malware/stuxnet.md)|2010|E1055.m02|Stuxnet uses Mrxcls.sys driver for persistence. It is registered as a boot start service by creating the registry key HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Services\MRxCIs\"ImagePath" = "%System%\drivers\mrxcls.sys". [[9]](#9)|
 |[**Netwalker**](../xample-malware/netwalker.md)|2020|E1055.001|Netwalker uses reflective DLL loading to inject from memory. [[10]](#10)|
 |[**DNSChanger**](../xample-malware/dnschanger.md)|2011|--|The malware can attach user process memory. [[13]](#13)|
-|[**Redhip**](../xample-malware/rebhip.md)|2011|E1055.003|The malware can inject threads. [[13]](#13)|
+|[**Redhip**](../xample-malware/redhip.md)|2011|E1055.003|The malware can inject threads. [[13]](#13)|
 |[**Conti**](../xample-malware/conti.md)|2019|E1055.012|Conti creates a process in a suspended state and unmaps or removes the PE image layout from a given process space.|
 
 ## Detection
@@ -80,6 +80,30 @@ The methods table includes existing ATT&CK sub-techniques, which have been enhan
 |[inject shellcode using a file mapping object](https://github.com/mandiant/capa-rules/blob/master/host-interaction/process/inject/inject-shellcode-using-a-file-mapping-object.yml)|Process Injection (E1055)|CreateFileMapping, MapViewOfFile, MapViewOfFileNuma2|
 |[inject shellcode using window subclass procedure](https://github.com/mandiant/capa-rules/blob/master/host-interaction/process/inject/inject-shellcode-using-window-subclass-procedure.yml)|Process Injection (E1055)|user32.SetProp, PostMessage, SendNotifyMessage|
 |[execute shellcode via Windows fibers](https://github.com/mandiant/capa-rules/blob/master/load-code/shellcode/execute-shellcode-via-windows-fibers.yml)|Process Injection::Injection via Windows Fibers (E1055.m05)|ConvertThreadToFiber, CreateFiber, SwitchToFiber|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[volatility_handles_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[volatility_ldrmodules_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[volatility_ldrmodules_2](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[volatility_malfind_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[volatility_malfind_2](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[volatility_modscan_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Process Injection (E1055)|--|
+|[injection_explorer](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/injection_explorer.py)|Process Injection (E1055)|NtReadVirtualMemory, NtWow64ReadVirtualMemory64, NtOpenProcess, FindWindowExA, SendNotifyMessageW, SendNotifyMessageA, NtCreateSection, SetWindowLongA, SetWindowLongW, FindWindowA, FindWindowW, FindWindowExW, ReadProcessMemory, SetWindowLongPtrA, NtOpenSection, SetWindowLongPtrW|
+|[injection_themeinitapihook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/injection_themeinitapihook.py)|Process Injection (E1055)|ThemeInitApiHook|
+|[explorer_http](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_explorer.py)|Process Injection (E1055)|WinHttpConnect, WinHttpOpenRequest|
+|[injection_createremotethread](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/injection_createremotethread.py)|Process Injection (E1055)|--|
+|[doppelganging](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|Process Injection (E1055)|--|
+|[injection_inter_process](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|Process Injection (E1055)|--|
+|[injection_create_remote_thread](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|Process Injection (E1055)|--|
+|[injection_process_hollowing](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|Process Injection (E1055)|--|
+|[transacted_hollowing](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|Process Injection (E1055)|NtRollbackTransaction, NtMapViewOfSection, RtlSetCurrentTransaction|
+|[persistence_ifeo](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/persistence_ifeo.py)|Process Injection (E1055)|--|
+|[persistence_ifeo](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/persistence_ifeo.py)|Process Injection::Injection and Persistence via Registry Modification (E1055.m02)|--|
+|[persistence_silent_process_exit](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/persistence_ifeo.py)|Process Injection (E1055)|--|
+|[injection_rwx](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/injection_rwx.py)|Process Injection (E1055)|VirtualProtectEx, NtAllocateVirtualMemory, NtProtectVirtualMemory|
+|[persistence_shim_database](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/persistence_shim.py)|Process Injection::Injection using Shims (E1055.m03)|--|
+|[injection_runpe](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/injection_runpe.py)|Process Injection (E1055)|--|
 
 ## References
 <a name="1">[1]</a> Ashkan Hosseini, *Ten Process Injection Techniques: A Technical Survey of Common and Trending Process Injection Techniques*, July 2017. https://www.elastic.co/blog/ten-process-injection-techniques-technical-survey-common-and-trending-process

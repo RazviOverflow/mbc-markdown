@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>10 November 2022</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -35,3 +35,11 @@ Malware alters a file extension. This could be done for many reasons, including 
 |Name|ID|Description|
 |---|---|---|
 |**Append Extension**|C0015.001|A new extension is appended.|
+
+## Detection
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[mimics_extension](https://github.com/CAPESandbox/community/blob/master/modules/signatures/all/mimics_filename.py)|MimicsExtension|Alter File Extension (C0015)|--|
+|[ransomware_file_modifications](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/ransomware_filemodifications.py)|RansomwareFileModifications|Alter File Extension (C0015)|MoveFileWithProgressW, MoveFileWithProgressTransactedW, NtCreateFile, NtWriteFile|
+|[ransomware_extensions](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/ransomware_fileextensions.py)|RansomwareExtensions|Alter File Extension (C0015)|--|

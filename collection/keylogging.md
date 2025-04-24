@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>27 April 2024</b></td>
 </tr>
 </table>
 
@@ -38,7 +38,6 @@ See ATT&CK: **Input Capture: Keylogging ([T1056.001](https://attack.mitre.org/te
 |---|---|---|
 |**Application Hook**|F0002.001|Keystrokes are captured with an application hook.|
 |**Polling**|F0002.002|Keystrokes are captured via polling (e.g., user32.GetAsyncKeyState, user32.GetKeyState).|
-
 
 ## Use in Malware
 
@@ -57,13 +56,34 @@ See ATT&CK: **Input Capture: Keylogging ([T1056.001](https://attack.mitre.org/te
 |[**Redhip**](../xample-malware/redhip.md)|2011|F0002.002|Malware logs keystrokes via polling. [[9]](#9)|
 |[**Rombertik**](../xample-malware/rombertik.md)|2015|F0002.002|Malware logs keystrokes via polling. [[9]](#9)|
 |[**Ursnif**](../xample-malware/ursnif.md)|2016|F0002.002|Malware logs keystrokes via polling. [[9]](#9)|
+|[**Snake**](../xample-malware/snake.md)|2004|F0002.001|Malware logs keystrokes via application hook. [[10]](#10)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[log keystrokes via polling](https://github.com/mandiant/capa-rules/blob/master/collection/keylog/log-keystrokes-via-polling.yml)|Keylogging::Polling (F0002.002)|user32.GetAsyncKeyState, user32.GetKeyState, user32.GetKeyboardState, user32.VkKeyScan, user32.VkKeyScanEx, user32.GetKeyNameText|
-|[log keystrokes via application hook](https://github.com/mandiant/capa-rules/blob/master/collection/keylog/log-keystrokes-via-application-hook.yml)|Keylogging::Application Hook (F0002.001)| |
+|[log keystrokes via application hook](https://github.com/mandiant/capa-rules/blob/master/collection/keylog/log-keystrokes-via-application-hook.yml)|Keylogging::Application Hook (F0002.001)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[infostealer_keylog](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/infostealer_keylog.py)|Keylogging (F0002)|SetWindowsHookExA, GetAsyncKeyState, SetWindowsHookExW|
+|[infostealer_keylog](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/infostealer_keylog.py)|Keylogging::Application Hook (F0002.001)|SetWindowsHookExA, GetAsyncKeyState, SetWindowsHookExW|
+|[browser_scanbox](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/browser_scanbox.py)|Keylogging (F0002)|JsEval, COleScript_ParseScriptText, COleScript_Compile|
+
+### F0002.002 Snippet
+<details>
+<summary> Collection::Keylogging::Polling </summary>
+SHA256: 000b535ab2a4fec86e2d8254f8ed65c6ebd37309ed68692c929f8f93a99233f6
+  
+Location: 0x438af1
+<pre>
+push    0x11    ; provide argument for function call.  In this case, 0x11 is the Windows keyboard code for indicating the 'CTRL' key
+call    USER32.DLL::GetKeyState ; call function to get the state of the control key
+test    ax, 0x8000      ; test to see what the previous function returned.  In this case, we are seeing if the return value's high-order bit is a 1, which would mean the ctrl key is pressed
+setnz   al      ; if the previous condition is not met (the zero flag is 1), a 1 is stored in byte al
+</pre>
+</details>
 
 ## References
 
@@ -77,11 +97,13 @@ See ATT&CK: **Input Capture: Keylogging ([T1056.001](https://attack.mitre.org/te
 
 <a name="5">[5]</a> https://www.cyber.nj.gov/threat-center/threat-profiles/trojan-variants/poison-ivy
 
-<a name="6">[6]</a> https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
+<a name="6">[6]</a> https://web.archive.org/web/20210307034415/https://www.fireeye.com/content/dam/fireeye-www/global/en/current-threats/pdfs/rpt-apt28.pdf
 
 <a name="7">[7]</a> capa v4.0, analyzed at MITRE on 10/12/2022
 
 <a name="8">[8]</a> https://www.mandiant.com/sites/default/files/2021-09/rpt-poison-ivy.pdf
 
 <a name="9">[9]</a> capa v4.0, analyzed at MITRE on 10/12/2022
+
+<a name="10">[10]</a> https://www.cybereason.com/blog/research/threat-analysis-report-snake-infostealer-malware
 

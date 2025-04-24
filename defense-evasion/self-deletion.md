@@ -12,7 +12,7 @@
 <td><b>Indicator Removal on Host: Uninstall Malicious Application (<a href="https://attack.mitre.org/techniques/T1630/001/">T1630.001</a>), Indicator Removal on Host: File Deletion (<a href="https://attack.mitre.org/techniques/T1070/004/">T1070.004</a>)</b></td>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.1</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -20,7 +20,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -30,7 +30,7 @@
 
 # Self Deletion
 
-Malware may uninstall itself to avoid detection. 
+Malware may remove itself from an infected system, typically after it has achieved its primary objective. This is done to evade detection, remove evidence of its presence, and make forensic analysis more difficult. The malware may use built-in commands, scripts, or other methods to delete its files, processes, or registry entries. 
 
 See ATT&CK: **Indicator Removal on Host: Uninstall Malicious Application ([T1630.001](https://attack.mitre.org/techniques/T1630/001/)), Indicator Removal on Host: File Deletion ([T1070.004](https://attack.mitre.org/techniques/T1070/004/))**.
 
@@ -40,7 +40,6 @@ See ATT&CK: **Indicator Removal on Host: Uninstall Malicious Application ([T1630
 |---|---|---|
 |**COMSPEC Environment Variable**|F0007.001|Uninstalls self via COMSPEC environment variable.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
@@ -49,13 +48,20 @@ See ATT&CK: **Indicator Removal on Host: Uninstall Malicious Application ([T1630
 |[**CozyCar**](../xample-malware/cozycar.md)|2010|--|CozyCar has a dll file that serves as a cleanup mechanism for its dropped binary. [[2]](#2)|
 |[**SearchAwesome**](../xample-malware/searchawesome.md)|2018|--|The malware will monitor if a specific file gets deleted and then will delete itself. [[3]](#3)|
 |[**WannaCry**](../xample-malware/wannacry.md)|2017|--|WannaCry looks for a DNS entry and if the entry exists, it terminates and deletes itself. [[4]](#4)|
+|[**Snake**](../xample-malware/snake.md)|2004|--|Snake can delete itself. [[5]](#5)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[self delete](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-forensic/self-deletion/self-delete.yml)|Self Deletion::COMSPEC Environment Variable (F0007.001)| |
+|[self delete](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-forensic/self-deletion/self-delete.yml)|Self Deletion::COMSPEC Environment Variable (F0007.001)|--|
+|[self delete using alternate data streams](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-forensic/self-deletion/self-delete-using-alternate-data-streams.yml)|Defense Evasion::Self Deletion (F0007)|SetFileInformationByHandle, kernel32.SetFileInformationByHandle|
 
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[trickbot_task_delete](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/trickbot_files.py)|Self Deletion (F0007)|DeleteFileW|
+|[deletes_executed_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/deletes_executed.py)|Self Deletion (F0007)|--|
+|[deletes_self](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/deletes_self.py)|Self Deletion (F0007)|NtDeleteFile, DeleteFileW, DeleteFileA, MoveFileWithProgressW, MoveFileWithProgressTransactedW|
 
 ## References
 
@@ -66,3 +72,5 @@ See ATT&CK: **Indicator Removal on Host: Uninstall Malicious Application ([T1630
 <a name="3">[3]</a> https://www.malwarebytes.com/blog/news/2018/10/mac-malware-intercepts-encrypted-web-traffic-for-ad-injection
 
 <a name="4">[4]</a> https://www.mandiant.com/resources/blog/wannacry-malware-profile
+
+<a name="5">[5]</a> https://www.cybereason.com/blog/research/threat-analysis-report-snake-infostealer-malware

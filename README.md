@@ -1,4 +1,4 @@
-# <a name="mbc"></a>Malware Behavior Catalog v3.0 #
+# <a name="mbc"></a>Malware Behavior Catalog v3.1 #
 The Malware Behavior Catalog (MBC) is a catalog of malware objectives and behaviors, created to support malware analysis-oriented use cases, such as labeling, similarity analysis, and standardized reporting. Please see the [FAQ](./yfaq/README.md) page for answers to common questions, and read the [newsletters](./ynewsletters/README.md) for information on the most recent MBC updates and activity.
 
 Open-source malware analysis tools map their output to MBC and ATT&CK:
@@ -62,7 +62,7 @@ The canonical representation for MBC content is **OBJECTIVE::Behavior::Method**.
 Objectives and behaviors can be used alone, but a method *must* be associated with a behavior.
 
 ### STIX 2.1 Representation ###
-A STIX 2.1 representation for MBC v3.0 is available in the [mbc-stix2.1](https://github.com/MBCProject/mbc-stix2.1) repository. It's based on a refined STIX 2.1 [Malware Behavior Extension](https://github.com/oasis-open/cti-stix-common-objects/tree/main/extension-definition-specifications/malware-behavior) that includes new STIX domain objects for MBC objectives, behaviors, and methods.
+A STIX 2.1 representation for MBC v3.1 is available in the [mbc-stix2.1](https://github.com/MBCProject/mbc-stix2.1) repository. It's based on a refined STIX 2.1 [Malware Behavior Extension](https://github.com/oasis-open/cti-stix-common-objects/tree/main/extension-definition-specifications/malware-behavior-8e9) that includes new STIX domain objects for MBC objectives, behaviors, and methods.
 
 ### Navigator View ###
 This visual representation of the MBC Matrix is based on the ATT&CK Navigator. Two views are available: 
@@ -107,7 +107,7 @@ The table below lists MBC behaviors and related ATT&CK techniques. In most cases
 |**B0008**|ANTI-BEHAVIORAL ANALYSIS, ANTI-STATIC ANALYSIS|**Executable Code Virtualization**|*none*|
 |**B0009**|ANTI-BEHAVIORAL ANALYSIS|**Virtual Machine Detection**|Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/techniques/T1497),[T1633](https://attack.mitre.org/techniques/T1633))|
 |**B0010**|ANTI-STATIC ANALYSIS|**Call Graph Generation Evasion**|*none*|
-|**B0011**|EXECUTION|**Remote Commands**|Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/techniques/T1497),[T1633](https://attack.mitre.org/techniques/T1633))|
+|**B0011**|EXECUTION|**Remote Commands**|*none*|
 |**B0012**|ANTI-STATIC ANALYSIS|**Disassembler Evasion**|*none*|
 |**B0013**|DISCOVERY|**Analysis Tool Discovery**|*none*|
 |**B0014**|DISCOVERY|**SMTP Connection Discovery**|*none*|
@@ -130,7 +130,7 @@ The table below lists MBC behaviors and related ATT&CK techniques. In most cases
 |**B0031**|COMMAND AND CONTROL|**Domain Name Generation**|Dynamic Resolution: Domain Name Generation ([T1568.002](https://attack.mitre.org/techniques/T1568/002))|
 |**B0032**|ANTI-STATIC ANALYSIS|**Executable Code Obfuscation**|*none*|
 |**B0033**|IMPACT|**Denial of Service**|Network Denial of Service ([T1498](https://attack.mitre.org/techniques/T1498))|
-|**B0034**|ANTI-STATIC ANALYSIS|**Executable Code Obfuscation**|*none*|
+|**B0034**|ANTI-STATIC ANALYSIS|**Executable Code Optimization**|*none*|
 |**B0035**|PERSISTENCE|**Shutdown Event**|*none*|
 |**B0036**|ANTI-BEHAVIORAL ANALYSIS|**Capture Evasion**|*none*|
 |**B0037**|DEFENSE EVASION|**Bypass Data Execution Prevention**|*none*|

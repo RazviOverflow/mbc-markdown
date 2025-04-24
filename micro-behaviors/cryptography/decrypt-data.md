@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -49,20 +49,25 @@ Malware may decrypt data.
 |**Stream Cipher**|C0031.013|Malware decrypts data encrypted with a stream cipher.|
 |**Twofish**|C0031.014|Malware decrypts data encrypted with the Twofish algorithm.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
-|[**BlackEnergy**](../xample-malware/blackenergy.md)|2007|--|BlackEnergy encrypts or decrypts via WinCrypt. [[1]](#1)|
-|[**Kovter**](../xample-malware/kovter.md)|2016|--|Encrypt or decrypt via WinCrypt (This capa rule had 1 match) [[1]](#1)|
+|[**BlackEnergy**](../../xample-malware/blackenergy.md)|2007|--|BlackEnergy encrypts or decrypts via WinCrypt. [[1]](#1)|
+|[**Kovter**](../../xample-malware/kovter.md)|2016|--|Encrypt or decrypt via WinCrypt [[1]](#1)|
+|[**Snake**](../../xample-malware/snake.md)|2004|C0031.001|Decrypts credential stores using AES [[2]](#2)|
+|[**Snake**](../../xample-malware/snake.md)|2004|C0031.005|Decrypts .NET assembly with 3DES [[2]](#2)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[encrypt or decrypt via WinCrypt](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/encrypt-or-decrypt-via-wincrypt.yml)|Decrypt Data (C0031)|CryptEncrypt, CryptDecrypt, CryptAcquireContext, CryptGenKey, CryptImportKey|
-|[decrypt data using AES via x86 extensions](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/decrypt-data-using-aes-via-x86-extensions.yml)|Decrypt Data::AES (C0031.001)| |
+|[decrypt data using AES via x86 extensions](https://github.com/mandiant/capa-rules/blob/master/data-manipulation/encryption/aes/decrypt-data-using-aes-via-x86-extensions.yml)|Decrypt Data::AES (C0031.001)|--|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|--|---|---|
+|[decryption](https://github.com/kevoreilly/CAPEv2/blob/master/modules/signatures/CAPE.py)|CAPE_Decryption|Decrypt Data (C0031)|CryptDecrypt|
 
 ## Code Snippets
 
@@ -125,4 +130,6 @@ retn
 ## References
 
 <a name="1">[1]</a> capa v4.0, analyzed at MITRE on 10/12/2022
+
+<a name="2">[2]</a> https://www.cybereason.com/blog/research/threat-analysis-report-snake-infostealer-malware
 

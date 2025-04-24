@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -35,3 +35,7 @@ Malware modifies the wallpaper.
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[change the wallpaper](https://github.com/mandiant/capa-rules/blob/master/host-interaction/gui/session/wallpaper/change-the-wallpaper.yml)|Wallpaper (C0035)|SystemParametersInfo|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[modify_desktop_wallpaper](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/modifies_wallpaper.py)|ModifiesDesktopWallpaper|Wallpaper (C0035)|SystemParametersInfoA, SystemParametersInfoW|

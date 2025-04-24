@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,27 +21,28 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>6 February 2024</b></td>
 </tr>
 </table>
 
 
 # Compression Library
 
+Malware may utilize a compression library.
 
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
-|[**Dark Comet**](../xample-malware/dark-comet.md)|2008|--|DarkComet linked against ZLIB. [[1]](#1)|
-|[**Hupigon**](../xample-malware/hupigon.md)|2013|--|Linked against ZLIB (This capa rule had 1 match) [[1]](#1)|
+|[**Dark Comet**](../../xample-malware/dark-comet.md)|2008|--|DarkComet linked against ZLIB. [[1]](#1)|
+|[**Hupigon**](../../xample-malware/hupigon.md)|2013|--|Linked against ZLIB [[1]](#1)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[linked against aPLib](https://github.com/mandiant/capa-rules/blob/master/linking/static/aplib/linked-against-aplib.yml)|Compression Library (C0060)| |
-|[linked against ZLIB](https://github.com/mandiant/capa-rules/blob/master/linking/static/zlib/linked-against-zlib.yml)|Compression Library (C0060)| |
+|[linked against aPLib](https://github.com/mandiant/capa-rules/blob/master/linking/static/aplib/linked-against-aplib.yml)|Compression Library (C0060)|--|
+|[linked against ZLIB](https://github.com/mandiant/capa-rules/blob/master/linking/static/zlib/linked-against-zlib.yml)|Compression Library (C0060)|--|
 
 ## References
 
