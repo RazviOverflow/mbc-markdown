@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,14 +21,14 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>12 June 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
 
 # Bootkit
 
-The boot sectors of a hard drive are modified (e.g., Master Boot Record (MBR)). ATT&CK associates bootkits with the Persistence. See ATT&CK: **Pre-OS Boot: Bootkit ([T1067](https://attack.mitre.org/techniques/T1067/))**.
+The boot sectors of a hard drive are modified (e.g., Master Boot Record (MBR)). ATT&CK associates bootkits with the Persistence. See ATT&CK: **Pre-OS Boot: Bootkit ([T1542.003](https://attack.mitre.org/techniques/T1542/003/))**.
 
 The MBC also associates the Bootkit behavior with Defense Evasion because the malware may execute before or external to the system's kernel or hypervisor (e.g., through the BIOS), making it more difficult to detect. (As of 2020, ATT&CK also associates the technique with Persistence.) 
 
@@ -39,6 +39,16 @@ The MBC also associates the Bootkit behavior with Defense Evasion because the ma
 |[**Mebromi**](../xample-malware/mebromi.md)|2011|--|The malware is an MBR bootkit and a BIOS bootkit targeting Award BIOS. [[1]](#1)|
 |[**TrickBot**](../xample-malware/trickbot.md)|2016|--|The malware can implement malicious code into firmware, allowing read, write, and/or erasure of the UEFI/BIOS firmware. [[2]](#24)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[accesses_primary_patition](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|--|
+|[bootkit](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|NtSetInformationFile, NtClose, DeviceIoControl, NtCreateFile, NtDuplicateObject, NtOpenFile, NtWriteFile, NtDeviceIoControlFile|
+|[direct_hdd_access](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|--|
+|[enumerates_physical_drives](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|--|
+|[physical_drive_access](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|--|
+|[suspicious_ioctl_scsipassthough](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bootkit.py)|Bootkit (F0013)|DeviceIoControl, NtDeviceIoControlFile|
 
 ## References
 

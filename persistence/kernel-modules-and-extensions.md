@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.1</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>12 June 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
@@ -44,6 +44,14 @@ See ATT&CK: **Boot or Logon Autostart Execution: Kernel Modules and Extensions (
 |Name|Date|Method|Description|
 |---|---|---|---|
 |[**Drovorub**](../xample-malware/drovorub.md)|2020|--|Drovorub uses a kernel module rootkit for loading and for persistence. [[1]](#1)|
+
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[volatility_devicetree_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Kernel Modules and Extensions (F0010)|--|
+|[volatility_devicetree_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Kernel Modules and Extensions::Device Driver (F0010.001)|--|
+|[driver_load](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/driver_load.py)|Kernel Modules and Extensions (F0010)|NtLoadDriver|
 
 ## References
 

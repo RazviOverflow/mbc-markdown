@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>3.0</b></td>
+<td><b>3.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
@@ -46,6 +46,13 @@ This description refines the ATT&CK **Disk Wipe: Disk Content Wipe ([T1561.001](
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[overwrite Master Boot Record (MBR)](https://github.com/mandiant/capa-rules/blob/master/impact/wipe-disk/wipe-mbr/overwrite-master-boot-record-mbr.yml)|Disk Wipe (F0014)|kernel32.WriteFile|
+|[delete drive layout via IOCTL](https://github.com/mandiant/capa-rules/blob/master/impact/wipe-disk/delete-drive-layout-via-ioctl.yml)|Disk Wipe (F0014)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[deletes_shadow_copies](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/deletes_shadowcopies.py)|Disk Wipe (F0014)|ShellExecuteExW, NtCreateUserProcess, CreateProcessInternalW|
+|[deletes_system_state_backup](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/deletes_system_backup.py)|Disk Wipe (F0014)|ShellExecuteExW, NtCreateUserProcess, CreateProcessInternalW|
+|[wiper_zeroedbytes](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/wiper.py)|Disk Wipe (F0014)|NtWriteFile|
 
 ## References
 

@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -70,9 +70,18 @@ See ATT&CK: **Hijack Execution Flow ([T1574](https://attack.mitre.org/techniques
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[create new application domain in .NET](https://github.com/mandiant/capa-rules/blob/master/host-interaction/memory/create-new-application-domain-in-dotnet.yml)|Hijack Execution Flow (F0015)| |
-|[execute shellcode via Windows callback function](https://github.com/mandiant/capa-rules/blob/master/load-code/shellcode/execute-shellcode-via-windows-callback-function.yml)|Hijack Execution Flow::Abuse Windows Function Calls (F0015.006)|EnumDateFormats, GrayString, LineDDA, EnumChildWindows, EnumDesktops, EnumDesktopWindows, EnumSystemCodePages, EnumSystemGeoID, EnumSystemLanguageGroups, EnumSystemLocales, EnumThreadWindows, EnumUILanguages, EnumWindows, EnumChildWindows, EnumTimeFormats|
+|[create new application domain in .NET](https://github.com/mandiant/capa-rules/blob/master/host-interaction/memory/create-new-application-domain-in-dotnet.yml)|Hijack Execution Flow (F0015)|--|
+|[execute shellcode via Windows callback function](https://github.com/mandiant/capa-rules/blob/master/load-code/shellcode/execute-shellcode-via-windows-callback-function.yml)|Hijack Execution Flow::Abuse Windows Function Calls (F0015.006)|AddPropSheetPageProc, CallWindowProc, CertEnumSystemStore, CertEnumSystemStoreLocator, CreateTimerQueueTimer, CryptEnumOIDInfo, DPA_Create, DPA_SetPtr, DPA_EnumCallback, DSA_Create, DSA_InsertItem, DSA_EnumCallback, DrawState, EnumCalendarInfo, EnumCalendarInfoEx, EnumDateFormats, GrayString, ImmEnumInputContext, LineDDA, EnumChildWindows, EnumDesktops, EnumDesktopWindows, EnumDirTree, EnumDisplayMonitors, EnumFontFamilies, EnumFontFamiliesEx, EnumFonts, EnumLanguageGroupLocales, GetDC, GetDCEx, EnumObjects, EnumProps, EnumPropsEx, EnumPwrSchemes, EnumResourceTypes, EnumSystemCodePages, EnumSystemGeoID, EnumSystemGeoNames, EnumSystemLanguageGroups, EnumSystemLocales, EnumThreadWindows, EnumUILanguages, EnumWindows, EnumWindowsStations, EnumerateLoadedModules, EnumTimeFormats, SymInitialize, SymEnumProcesses, SymRegisterCallback, VerifierEnumerateResource|
 |[rebuild import table](https://github.com/mandiant/capa-rules/blob/master/load-code/pe/rebuild-import-table.yml)|Hijack Execution Flow::Import Address Table Hooking (F0015.003)|LoadLibraryA, GetProcAddress|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[infostealer_keylog](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/infostealer_keylog.py)|Hijack Execution Flow (F0015)|SetWindowsHookExA, GetAsyncKeyState, SetWindowsHookExW|
+|[infostealer_keylog](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/infostealer_keylog.py)|Hijack Execution Flow::Procedure Hooking (F0015.007)|SetWindowsHookExA, GetAsyncKeyState, SetWindowsHookExW|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Hijack Execution Flow (F0015)|SetWindowsHookExA, SetWindowsHookExW|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Hijack Execution Flow::Procedure Hooking (F0015.007)|SetWindowsHookExA, SetWindowsHookExW|
+|[dll_load_uncommon_file_types](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/dll_load_uncommon.py)|Hijack Execution Flow (F0015)|LdrLoadDll|
+|[malicious_dynamic_function_loading](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/malicious_dynamic_function_loading.py)|Hijack Execution Flow (F0015)|LdrGetProcedureAddress, LdrLoadDll|
 
 ## References
 

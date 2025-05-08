@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>17 August 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -49,6 +49,12 @@ See ATT&CK: **Ingress Tool Transfer ([T1105](https://attack.mitre.org/techniques
 |[**Gamut**](../xample-malware/gamut.md)|2014|--|Gamut receives files from the C2. [[10]](#10)|
 |[**UP007**](../xample-malware/up007.md)|2016|--|UP007 downloads files from the C2. [[11]](#11)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[suspicious_mpcmdrun_use](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/windows_utilities.py)|Ingress Tool Transfer (E1105)|--|
+|[network_document_file](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_payload_download.py)|Ingress Tool Transfer (E1105)|URLDownloadToFileW, HttpOpenRequestW, send, InternetCrackUrlW, InternetCrackUrlA, WSASend, URLDownloadToCacheFileW|
 
 ## References
 

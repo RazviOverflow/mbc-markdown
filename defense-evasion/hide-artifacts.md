@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,14 +21,16 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>4 March 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
 
 # Hide Artifacts
 
-Malware may hide artifacts to evade detection and/or to persist on the system. See potential methods related to malware below. 
+Malware may conceal its presence and activities on a system. This can involve hiding files, directories, or other data that could reveal the malware's existence or behavior. Techniques can include using encryption or obfuscation, altering file timestamps, or manipulating data to blend in with normal system activity. The goal is to avoid detection by security tools and to prolong the period during which the malware can operate undetected on the victim's system.
+
+See potential methods related to malware below. 
 
 See ATT&CK: **Hide Artifacts ([T1564](https://attack.mitre.org/techniques/T1564/), [T1628](https://attack.mitre.org/techniques/T1628/))**.
 
@@ -42,13 +44,18 @@ See ATT&CK: **Hide Artifacts ([T1564](https://attack.mitre.org/techniques/T1564/
 |**Hidden Processes**|E1564.m03|Hides processes used by the adversary or malware instance. This can involve techniques such as process list unlinking.|
 |**Hidden Services**|E1564.m04|Hides any system services that the malware instance creates or injects itself into. Services can be hidden by hiding associated registry keys.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
 |[**YiSpecter**](../xample-malware/yispecter.md)|2015|--|The malware hides icons from iOS's SpringBoard as well as use the same name and logos of system apps to trick iOS power users. [[1]](#1)|
 |[**Stuxnet**](../xample-malware/stuxnet.md)|2010|--|Stuxnet intercepts IRP requests (reads, writes) to devices (NFTS, FAT, CD-ROM). It monitors directory control IRPs, in particular directory query notifications, such that when an application requests the list of files, it returns a Stuxnet-specified subset of the true items. These filters hide the files used by Stuxnet to spread through removable drives.  [[2]](#2)|
+
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[stealth_window](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_window.py)|Hide Artifacts (E1564)|ShellExecuteExW, CreateProcessInternalW|
 
 ## References
 

@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
@@ -55,16 +55,15 @@ Instead of being listed alphabetically, methods have been grouped to better faci
 |**WinHTTP**|C0002.008|An HTTP request is made via the Windows HTTP Services (WinHTTP) application programming interface (API).|
 |**WinINet**|C0002.007|A HTTP request is made via the Windows Internet (WinINet) application programming interface (API). A specific function can be specified as a method on the [WinInet](../communication/wininet.md) micro-behavior.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
-|[**BlackEnergy**](../xample-malware/blackenergy.md)|2007|C0002.010|The malware initializes IWebBrowser2. [[1]](#1)|
-|[**BlackEnergy**](../xample-malware/blackenergy.md)|2007|C0002.011|The malware extracts the HTTP body. [[1]](#1)|
-|[**Emotet**](../xample-malware/emotet.md)|2018|C0002.012|The malware creates a HTTP request. [[1]](#1)|
-|[**Kovter**](../xample-malware/kovter.md)|2016|C0002.009|Kovter connects to a HTTP server. [[1]](#1)|
-|[**Kovter**](../xample-malware/kovter.md)|2016|C0002.012|Kovter creates a HTTP request. [[1]](#1)|
+|[**BlackEnergy**](../../xample-malware/blackenergy.md)|2007|C0002.010|The malware initializes IWebBrowser2. [[1]](#1)|
+|[**BlackEnergy**](../../xample-malware/blackenergy.md)|2007|C0002.011|The malware extracts the HTTP body. [[1]](#1)|
+|[**Emotet**](../../xample-malware/emotet.md)|2018|C0002.012|The malware creates a HTTP request. [[1]](#1)|
+|[**Kovter**](../../xample-malware/kovter.md)|2016|C0002.009|Kovter connects to a HTTP server. [[1]](#1)|
+|[**Kovter**](../../xample-malware/kovter.md)|2016|C0002.012|Kovter creates a HTTP request. [[1]](#1)|
 
 ## Detection
 
@@ -88,12 +87,52 @@ Instead of being listed alphabetically, methods have been grouped to better faci
 |[prepare HTTP request](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/prepare-http-request.yml)|HTTP Communication::Create Request (C0002.012)|winhttp.WinHttpOpenRequest|
 |[create HTTP request](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/create-http-request.yml)|HTTP Communication::Create Request (C0002.012)|wininet.InternetOpen, System.Net.WebRequest::Create, System.Net.WebRequest::CreateDefault, System.Net.WebRequest::CreateHttp, wininet.InternetCloseHandle|
 |[send file via HTTP](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/send-file-via-http.yml)|HTTP Communication::Send Data (C0002.005)|wininet.InternetWriteFile|
-|[decompress HTTP response via IEncodingFilterFactory](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/decompress-http-response-via-iencodingfilterfactory.yml)|HTTP Communication::Get Response (C0002.017)| |
+|[decompress HTTP response via IEncodingFilterFactory](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/decompress-http-response-via-iencodingfilterfactory.yml)|HTTP Communication::Get Response (C0002.017)|--|
 |[check HTTP status code](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/check-http-status-code.yml)|HTTP Communication::Read Header (C0002.014)|atoi, wininet.HttpQueryInfo|
 |[get HTTP response content encoding](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/get-http-response-content-encoding.yml)|HTTP Communication::Get Response (C0002.017)|wininet.HttpQueryInfo|
 |[connect to URL](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/connect-to-url.yml)|HTTP Communication::Open URL (C0002.004)|wininet.InternetOpenUrl|
 |[connect to HTTP server](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/connect-to-http-server.yml)|HTTP Communication::Connect to Server (C0002.009)|wininet.InternetConnect|
-|[extract HTTP body](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/extract-http-body.yml)|HTTP Communication::Extract Body (C0002.011)| |
+|[extract HTTP body](https://github.com/mandiant/capa-rules/blob/master/communication/http/client/extract-http-body.yml)|HTTP Communication::Extract Body (C0002.011)|--|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[internet_dropper](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/internet_dropper.py)|Internet_Dropper|HTTP Communication (C0002)|HttpOpenRequestA, InternetConnectA, HttpOpenRequestW, InternetConnectW|
+|[bot_madness](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_madness.py)|Madness|HTTP Communication (C0002)|--|
+|[bot_madness](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_madness.py)|Madness|HTTP Communication::Send Request (C0002.003)|--|
+|[bot_drive](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_drive.py)|Drive|HTTP Communication (C0002)|--|
+|[bot_drive](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_drive.py)|Drive|HTTP Communication::Send Data (C0002.005)|--|
+|[network_cnc_http](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_cnc_http.py)|NetworkCnCHTTP|HTTP Communication (C0002)|--|
+|[recon_beacon](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/recon_beacon.py)|Recon_Beacon|HTTP Communication (C0002)|HttpOpenRequestA, HttpSendRequestA|
+|[network_http](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/network_http.py)|NetworkHTTP|HTTP Communication (C0002)|--|
+|[explorer_http](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/network_explorer.py)|ExplorerHTTP|HTTP Communication (C0002)|WinHttpConnect, WinHttpOpenRequest|
+|[bot_drive2](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_drive2.py)|Drive2|HTTP Communication (C0002)|--|
+|[bot_drive2](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_drive2.py)|Drive2|HTTP Communication::Send Data (C0002.005)|--|
+|[bot_dirtjumper](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_dirtjumper.py)|DirtJumper|HTTP Communication (C0002)|--|
+|[bot_dirtjumper](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_dirtjumper.py)|DirtJumper|HTTP Communication::Send Data (C0002.005)|--|
+|[bot_athenahttp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/bot_athenahttp.py)|AthenaHttp|HTTP Communication (C0002)|--|
+|[koadic_network_activity](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/exploitation_framework_koadic.py)|KoadicNetworkActivity|HTTP Communication (C0002)|WinHttpOpenRequest, HttpOpenRequestW|
+|[http_request](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/http_request.py)|HTTP_Request|HTTP Communication (C0002)|HttpOpenRequestA, HttpOpenRequestW, InternetConnectW, InternetOpenUrlA, InternetConnectA, InternetOpenUrlW, WinHttpGetProxyForUrl|
+|[cmdline_http_link](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/cmdline_anomaly.py)|CommandLineHTTPLink|HTTP Communication (C0002)|--|
+|[cmdline_reversed_http_link](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/cmdline_anomaly.py)|CommandLineReversedHTTPLink|HTTP Communication (C0002)|--|
+|[network_docfile_http](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/network_docfile_http.py)|NetworkDocumentHTTP|HTTP Communication (C0002)|InternetCrackUrlW, InternetCrackUrlA, URLDownloadToFileW, HttpOpenRequestW, InternetReadFile, WSASend|
+|[banker_zeus_url](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/banker_zeus_url.py)|ZeusURL|HTTP Communication (C0002)|--|
+|[downloads_from_filehosting](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/filehostings.py)|Modiloader_APIs|HTTP Communication (C0002)|InternetOpenUrlA, WinHttpOpenRequest|
+|[purplewave_network_activity](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/infostealer_purplewave.py)|PurpleWaveNetworkAcivity|HTTP Communication (C0002)|InternetOpenW, HttpAddRequestHeadersA, HttpSendRequestW, HttpOpenRequestW|
+
+### C0002.017 Snippet
+<details>
+<summary> Communication::HTTP Communication::Get Response </summary>
+SHA256: 3ac8c22eb7c59d35fe49c20f2a0eca06765543dfb15f455a5557af4428066641
+Location: 0x180001380
+<pre>
+mov     param_2, ebx
+lea     r9, [rsp + 0x44]        ; where to store the number of bytes read
+add     param_2, r14    ; pointer to buffer to receive HTTP data
+mov     param_3, 0x400  ; number of bytes to read (1024)
+mov     param_1, rsi    ; handle to previously opened HTTP request
+call    qword ptr [->WININET::InternetReadFile] ; Windows API for reading data from HTTP or FTP connections
+</pre>
+</details>
 
 ## References
 

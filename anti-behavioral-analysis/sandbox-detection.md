@@ -9,7 +9,7 @@
 </tr>
 <tr>
 <td><b>Related ATT&CK Techniques</b></td>
-<td><b>Virtualization/Sandbox Evasion Checks (<a href="https://attack.mitre.org/techniques/T1497/001/">T1497.001</a>, <a href="https://attack.mitre.org/techniques/T1633/001/">T1633.001</a>), Virtualization/Sandbox Evasion: User Activity Based Checks (<a href="https://attack.mitre.org/techniques/T1497/002/">T1497.002</a>)</b></td>
+<td><b>Virtualization/Sandbox Evasion: System Checks (<a href="https://attack.mitre.org/techniques/T1497/001/">T1497.001</a>, <a href="https://attack.mitre.org/techniques/T1633/001/">T1633.001</a>), Virtualization/Sandbox Evasion: User Activity Based Checks (<a href="https://attack.mitre.org/techniques/T1497/002/">T1497.002</a>)</b></td>
 </tr>
 <tr>
 <td><b>Anti-Analysis Type</b></td>
@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>17 August 2023</b></td>
+<td><b>27 April 2024</b></td>
 </tr>
 </table>
 
@@ -50,7 +50,6 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |**Timing/Uptime Check**|B0007.009|Comparing single GetTickCount with some value to see if system has been started at least *X* amount ago. This behavior can be mitigated in non-automated analysis environments.|
 |**Test API Routines**|B0007.010|Calls Windows API routines with invalid arguments to identify error supression.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
@@ -63,7 +62,6 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |[**EvilBunny**](../xample-malware/evilbunny.md)|2011|--|EvilBunny hooks time retrieval APIs and calls each API twice to calculate a delta. Execution aborts depending on the delta value. [[8]](#8)|
 |[**Vobfus**](../xample-malware/vobfus.md)|2016|--|Vobfus uses GetModuleHandle API to check for the presence of a sandbox. [[9]](#9)|
 
-
 ## Detection
 
 |Tool: capa|Mapping|APIs|
@@ -73,9 +71,30 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 
 |Tool: CAPE|Mapping|APIs|
 |---|---|---|
-|[antisandbox_joe_anubis_files.py](https://github.com/kevoreilly/community/blob/master/modules/signatures/antisandbox_joe_anubis_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
-|[antisandbox_cuckoo_files](https://github.com/kevoreilly/community/blob/master/modules/signatures/antisandbox_cuckoo_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
-
+|[antisandbox_joe_anubis_files.py](https://github.com/kevoreilly/community/blob/master/modules/signatures/windows/antisandbox_joe_anubis_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_cuckoo_files](https://github.com/kevoreilly/community/blob/master/modules/signatures/windows/antisandbox_cuckoo_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_cuckoo_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_cuckoo_files.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_cuckoo_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_cuckoo_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_threattrack_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_threattrack_files.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_threattrack_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_threattrack_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_sleep](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sleep.py)|Sandbox Detection (B0007)|NtDelayExecution|
+|[antisandbox_sleep](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sleep.py)|Sandbox Detection::Timing/Date Check (B0007.008)|NtDelayExecution|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Sandbox Detection (B0007)|SetWindowsHookExA, SetWindowsHookExW|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Sandbox Detection::Human User Check (B0007.003)|SetWindowsHookExA, SetWindowsHookExW|
+|[antisandbox_foregroundwindows](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_forehwnd.py)|Sandbox Detection (B0007)|GetForegroundWindow, NtDelayExecution|
+|[antisandbox_sboxie_mutex](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sboxie_mutex.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_script_timer](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_scripttimer.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_sboxie_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sboxie_libs.py)|Sandbox Detection (B0007)|LdrGetDllHandle, LdrLoadDll|
+|[antisandbox_cuckoocrash](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_cuckoocrash.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_joe_anubis_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_joe_anubis_files.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_joe_anubis_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_joe_anubis_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_fortinet_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_fortinet_files.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_fortinet_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_fortinet_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_sunbelt_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sunbelt_files.py)|Sandbox Detection (B0007)|--|
+|[antisandbox_sunbelt_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sunbelt_files.py)|Sandbox Detection::Check Files (B0007.002)|--|
+|[antisandbox_sboxie_objects](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sboxie_objects.py)|Sandbox Detection (B0007)|NtOpenDirectoryObject|
+|[antisandbox_sunbelt_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sunbelt_libs.py)|Sandbox Detection (B0007)|LdrGetDllHandle, LdrLoadDll|
+|[antisandbox_cuckoo](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_cuckoo.py)|Sandbox Detection (B0007)|--|
 
 ## Code Snippets
 
@@ -119,7 +138,7 @@ mov     bl, 1
 
 <a name="2">[2]</a> Splunk Threat Research Team,"From Macros to No Macros: Continuous Malware Improvements by QakBot," Splunk, blog,, 01 December 2022. [Online]. Available: https://www.splunk.com/en_us/blog/security/from-macros-to-no-macros-continuous-malware-improvements-by-qakbot.html.
 
-<a name="3">[3]</a> https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html 
+<a name="3">[3]</a> https://web.archive.org/web/20200815134441/https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html 
 
 <a name="4">[4]</a> https://blogs.cisco.com/security/talos/rombertik
 

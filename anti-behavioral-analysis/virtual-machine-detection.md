@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.4</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>27 December 2024</b></td>
 </tr>
 </table>
 
@@ -59,6 +59,7 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |**Check Windows - Title bars**|B0009.022|Malware may check windows for VM-related characteristics. May inject malicious code to svchost.exe to check all open window title bar text to a list of strings indicating virtualized environment.|
 |**Check Windows - Unique windows**|B0009.021|Malware may check windows for VM-related characteristics. May check for the presence of known windows from analysis tools running in a VM.|
 |**Check Windows - Window size**|B0009.020|Malware may check windows for VM-related characteristics. Tiny window size may indicate a VM.|
+|**Check Username or Hostname**|B0009.039|Malware checks for hostnames or session usernames that indicate the use of a virtual machine.|
 |**Guest Process Testing**|B0009.010|Virtual machines offer guest additions that can be installed to add functionality such as clipboard sharing. Detecting the process responsible for these tasks, via its name or other methods, is a technique employed by malware for detecting whether it is being executed in a virtual machine.|
 |**HTML5 Performance Object Check**|B0009.011|In three browser families, it is possible to extract the frequency of the Windows performance counter frequency, using standard HTML and Javascript. This value can then be used to detect whether the code is being executed in a virtual machine, by detecting two specific frequencies commonly used in virtual but not physical machines.|
 |**Human User Check**|B0009.012|Detects whether there is any "user" activity on the machine, such as the movement of the mouse cursor, non-default wallpaper, or recently opened Office files. Directories or file might be counted. If there is no human activity, the machine is suspected to be a virtualized machine and/or sandbox. Other items used to detect a user: mouse clicks (single/double), DialogBox, scrolling, color of background pixel, change in foreground window [[5]](#5). This method is very similar to ATT&CK's [Virtualization/Sandbox Evasion: User Activity Based Checks](https://attack.mitre.org/techniques/T1497/002/) sub-technique.|
@@ -86,7 +87,6 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |**Unique Hardware/Firmware Check - I/O Communication Port**|B0009.025|Malware may check for hardware characteristics unique to being virtualized, allowing the malware to detect the virtual environment. VMware uses virtual I/O ports for communication between the virtual machine and the host operating system to support functionality like copy and paste between the two systems. The port can be queried and compared with a magic number VMXh to identify the use of VMware. This method is related to Unprotect technique U1336.|
 |**Unique Hardware/Firmware Check - MAC Address**|B0009.028|Malware may check for hardware characteristics unique to being virtualized, allowing the malware to detect the virtual environment. VMware uses specific virtual MAC address that can be detected. The usual MAC address used started with the following numbers: "00:0C:29", "00:1C:14", "00:50:56", "00:05:69". Virtualbox uses specific virtual MAC address that can be detected by Malware. The usual MAC address used started with the following numbers: 08:00:27. [[2]](#2) This method is related to Unprotect technique U1335.|
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
@@ -104,28 +104,88 @@ The related **Virtualization/Sandbox Evasion ([T1497](https://attack.mitre.org/t
 |[**Ursnif**](../xample-malware/ursnif.md)|2016|B0009.004|The malware checks if there are virtual machine processes running (Vbox, vmware, etc). [[11]](#11)|
 |[**Dark Comet**](../xample-malware/dark-comet.md)|2008|B0009.012|The malware checks for an unmoving mouse cursor. [[12]](#12)|
 
-
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[check for sandbox and av modules](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-av/check-for-sandbox-and-av-modules.yml)|Virtual Machine Detection (B0009)|GetModuleHandle|
 |[check for Windows sandbox via genuine state](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-genuine-state.yml)|Virtual Machine Detection (B0009)|SLIsGenuineLocal, UuidFromString|
-|[reference anti-VM strings targeting Parallels](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-parallels.yml)|Virtual Machine Detection (B0009)| |
-|[check for unmoving mouse cursor](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-unmoving-mouse-cursor.yml)|Virtual Machine Detection::Human User Check (B0009.012)| |
-|[reference anti-VM strings targeting VirtualPC](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-virtualpc.yml)|Virtual Machine Detection (B0009)| |
-|[reference anti-VM strings targeting VMWare](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-vmware.yml)|Virtual Machine Detection (B0009)| |
+|[reference anti-VM strings targeting Parallels](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-parallels.yml)|Virtual Machine Detection (B0009)|--|
+|[check for unmoving mouse cursor](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-unmoving-mouse-cursor.yml)|Virtual Machine Detection::Human User Check (B0009.012)|--|
+|[reference anti-VM strings targeting VirtualPC](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-virtualpc.yml)|Virtual Machine Detection (B0009)|--|
+|[reference anti-VM strings targeting VMWare](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-vmware.yml)|Virtual Machine Detection (B0009)|--|
 |[check for foreground window switch](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-foreground-window-switch.yml)|Virtual Machine Detection::Human User Check (B0009.012)|Sleep|
-|[detect VM via disk hardware WMI queries](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/detect-vm-via-disk-hardware-wmi-queries.yml)|Virtual Machine Detection::Unique Hardware/Firmware Check (B0009.023)| |
-|[reference anti-VM strings targeting Qemu](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-qemu.yml)|Virtual Machine Detection (B0009)| |
-|[reference anti-VM strings targeting Xen](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-xen.yml)|Virtual Machine Detection (B0009)| |
-|[check for sandbox username or hostname](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-sandbox-username-or-hostname.yml)|Virtual Machine Detection (B0009)| |
-|[check for Windows sandbox via process name](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-process-name.yml)|Virtual Machine Detection (B0009)| |
+|[detect VM via disk hardware WMI queries](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/detect-vm-via-disk-hardware-wmi-queries.yml)|Virtual Machine Detection::Unique Hardware/Firmware Check (B0009.023)|--|
+|[reference anti-VM strings targeting Qemu](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-qemu.yml)|Virtual Machine Detection (B0009)|--|
+|[reference anti-VM strings targeting Xen](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-xen.yml)|Virtual Machine Detection (B0009)|--|
+|[check for sandbox username or hostname](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-sandbox-username-or-hostname.yml)|Virtual Machine Detection (B0009)|--|
+|[check for Windows sandbox via process name](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-process-name.yml)|Virtual Machine Detection (B0009)|--|
 |[check for Windows sandbox via dns suffix](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-dns-suffix.yml)|Virtual Machine Detection (B0009)|GetAdaptersAddresses|
-|[check for Windows sandbox via device](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-device.yml)|Virtual Machine Detection (B0009)| |
-|[reference anti-VM strings targeting VirtualBox](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-virtualbox.yml)|Virtual Machine Detection (B0009)| |
+|[check for Windows sandbox via device](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-device.yml)|Virtual Machine Detection (B0009)|--|
+|[reference anti-VM strings targeting VirtualBox](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings-targeting-virtualbox.yml)|Virtual Machine Detection (B0009)|--|
 |[check for Windows sandbox via registry](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/check-for-windows-sandbox-via-registry.yml)|Virtual Machine Detection (B0009)|RegOpenKeyEx, RegEnumValue|
-|[reference anti-VM strings](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings.yml)|Virtual Machine Detection (B0009)| |
+|[reference anti-VM strings](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-vm/vm-detection/reference-anti-vm-strings.yml)|Virtual Machine Detection (B0009)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[antivm_generic_disk](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_disk.py)|Virtual Machine Detection (B0009)|DeviceIoControl, NtClose, NtCreateFile, NtDuplicateObject, NtOpenFile, NtDeviceIoControlFile|
+|[antivm_generic_disk](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_disk.py)|Virtual Machine Detection::Modern Specs Check - Drive size (B0009.015)|DeviceIoControl, NtClose, NtCreateFile, NtDuplicateObject, NtOpenFile, NtDeviceIoControlFile|
+|[antivm_vpc_mutex](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vpc_mutex.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_directory_objects](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_dirobjects.py)|Virtual Machine Detection (B0009)|NtQueryDirectoryObject, NtOpenDirectoryObject|
+|[antivm_directory_objects](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_dirobjects.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|NtQueryDirectoryObject, NtOpenDirectoryObject|
+|[antivm_network_adapters](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_network_adapter.py)|Virtual Machine Detection (B0009)|GetAdaptersAddresses|
+|[antivm_generic_cpu](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_cpu.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_generic_cpu](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_cpu.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_generic_cpu](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_cpu.py)|Virtual Machine Detection::Unique Hardware/Firmware Check - BIOS (B0009.024)|--|
+|[antivm_vbox_provname](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_provname.py)|Virtual Machine Detection (B0009)|WNetGetProviderNameW|
+|[antivm_vbox_provname](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_provname.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|WNetGetProviderNameW|
+|[antivm_generic_bios](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_bios.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_generic_bios](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_bios.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_generic_bios](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_bios.py)|Virtual Machine Detection::Unique Hardware/Firmware Check - BIOS (B0009.024)|--|
+|[antivm_vbox_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vbox_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vmware_events](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_events.py)|Virtual Machine Detection (B0009)|NtOpenEvent, NtCreateEvent|
+|[antivm_vbox_devices](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_devices.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vbox_devices](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_devices.py)|Virtual Machine Detection::Check Virtual Devices (B0009.008)|--|
+|[antivm_vmware_devices](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_devices.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vmware_devices](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_devices.py)|Virtual Machine Detection::Check Virtual Devices (B0009.008)|--|
+|[antivm_hyperv_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_hyperv_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_hyperv_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_hyperv_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vbox_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_files.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vbox_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_files.py)|Virtual Machine Detection::Check Virtual Devices (B0009.008)|--|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Virtual Machine Detection (B0009)|SetWindowsHookExA, SetWindowsHookExW|
+|[antisandbox_mouse_hook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_mouse_hook.py)|Virtual Machine Detection::Human User Check (B0009.012)|SetWindowsHookExA, SetWindowsHookExW|
+|[antivm_generic_scsi](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_scsi.py)|Virtual Machine Detection (B0009)|RegOpenKeyExW, RegQueryValueExA, RegQueryValueExW, RegOpenKeyExA|
+|[antivm_generic_scsi](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_scsi.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|RegOpenKeyExW, RegQueryValueExA, RegQueryValueExW, RegOpenKeyExA|
+|[antivm_vmware_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_libs.py)|Virtual Machine Detection (B0009)|LdrLoadDll|
+|[antivm_vmware_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_libs.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|LdrLoadDll|
+|[antivm_xen_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_xen_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_xen_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_xen_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_parallels_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_parallels_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_parallels_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_parallels_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_generic_diskreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_diskreg.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_generic_diskreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_diskreg.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vpc_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vpc_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vpc_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vpc_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_bochs_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_bochs_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_bochs_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_bochs_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vpc_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vpc_files.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vpc_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vpc_files.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|--|
+|[antivm_vmware_mutexes](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_mutexes.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vbox_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_libs.py)|Virtual Machine Detection (B0009)|LdrLoadDll|
+|[antivm_vbox_libs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_libs.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|LdrLoadDll|
+|[antivm_generic_system](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_system.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_generic_system](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_system.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vmware_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_files.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vmware_files](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_files.py)|Virtual Machine Detection::Check File and Directory Artifacts (B0009.001)|--|
+|[antivm_generic_services](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_services.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|RegOpenKeyExW, RegEnumKeyExW, RegEnumKeyExA, RegOpenKeyExA|
+|[antivm_generic_services](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_services.py)|Virtual Machine Detection::Check Running Services (B0009.006)|RegOpenKeyExW, RegEnumKeyExW, RegEnumKeyExA, RegOpenKeyExA|
+|[antivm_generic_disk_setupapi](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_generic_disk_setupapi.py)|Virtual Machine Detection (B0009)|SetupDiGetClassDevsA, SetupDiGetClassDevsW|
+|[antisandbox_sboxie_objects](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_sboxie_objects.py)|Virtual Machine Detection (B0009)|NtOpenDirectoryObject|
+|[antivm_vmware_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_keys.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vmware_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vmware_keys.py)|Virtual Machine Detection::Check Registry Keys (B0009.005)|--|
+|[antivm_vbox_window](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_window.py)|Virtual Machine Detection (B0009)|--|
+|[antivm_vbox_window](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_vbox_window.py)|Virtual Machine Detection::Check Windows (B0009.009)|--|
 
 ## Code Snippets
 
@@ -167,7 +227,6 @@ jmp short loc_401CBB
 </pre>
 </details>
 
-
 ## References
 
 <a name="1">[1]</a> Check Point Research,"CP<r>: Evasion Techniques," evasions.checkpoint.com, [Online]. Available: https://evasions.checkpoint.com.
@@ -180,7 +239,7 @@ jmp short loc_401CBB
 
 <a name="5">[5]</a> https://github.com/LordNoteworthy/al-khaser
 
-<a name="6">[6]</a> https://web.archive.org/web/20161025013916/https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html
+<a name="6">[6]</a> https://web.archive.org/web/20161025013916/https://web.archive.org/web/20200815134441/https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html
 
 <a name="7">[7]</a> https://securelist.com/the-banking-trojan-emotet-detailed-analysis/69560/
 

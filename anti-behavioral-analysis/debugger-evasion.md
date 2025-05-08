@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.3</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,7 +25,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>27 April 2024</b></td>
 </tr>
 </table>
 
@@ -89,12 +89,20 @@ The related **Debugger Evasion ([T1622](https://attack.mitre.org/techniques/T162
 |[hide thread from debugger](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-debugging/debugger-evasion/hide-thread-from-debugger.yml)|Debugger Evasion (B0002)|NtSetInformationThread, ZwSetInformationThread, GetCurrentThread|
 |[switch active desktop](https://github.com/mandiant/capa-rules/blob/master/host-interaction/gui/switch-active-desktop.yml)|Debugger Evasion (B0002)|user32.CreateDesktop, user32.SwitchDesktop|
 
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[antidebug_guardpages](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_guardpages.py)|Debugger Evasion (B0002)|VirtualProtectEx, NtAllocateVirtualMemory, NtProtectVirtualMemory|
+|[antidebug_guardpages](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_guardpages.py)|Debugger Evasion::Guard Pages (B0002.008)|VirtualProtectEx, NtAllocateVirtualMemory, NtProtectVirtualMemory|
+|[antidebug_ntcreatethreadex](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_ntcreatethreadex.py)|Debugger Evasion (B0002)|NtCreateThreadEx|
+|[debugs_self](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/debugs_self.py)|Debugger Evasion (B0002)|CreateProcessInternalW|
+|[debugs_self](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/debugs_self.py)|Debugger Evasion::Self-Debugging (B0002.024)|CreateProcessInternalW|
+
 ## References
 
 <a name="1">[1]</a> https://anti-reversing.com/Downloads/Anti-Reversing/The_Ultimate_Anti-Reversing_Reference.pdf
 
 <a name="2">[2]</a> https://web.archive.org/web/20210225195315/https://www.synack.com/blog/analyzing-the-anti-analysis-logic-of-an-adware-installer/
 
-<a name="3">[3]</a> https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html
+<a name="3">[3]</a> https://web.archive.org/web/20200815134441/https://www.fireeye.com/blog/threat-research/2011/01/the-dead-giveaways-of-vm-aware-malware.html
 
 <a name="4">[4]</a> https://securitynews.sonicwall.com/xmlpost/revisiting-vobfus-worm-mar-8-2013/

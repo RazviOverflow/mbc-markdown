@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>10 November 2022</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -29,3 +29,10 @@
 # Heap Spray
 
 Malware may use heap spraying to write a sequence of bytes on the heap section of a process.
+
+## Detection
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[exploit_heapspray](https://github.com/CAPESandbox/community/tree/master/modules/signatures/exploit_heapspray.py)|ExploitHeapspray|Heap Spray (C0006)|NtAllocateVirtualMemory|
+

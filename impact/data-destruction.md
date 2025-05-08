@@ -17,7 +17,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -25,14 +25,14 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
 
 # Data Destruction
 
-Data, system files, or other files are destroyed. Individual files are selected, as opposed to wiping an entire sector.
+Malware may deliberately delete or otherwise render inaccessible data on a compromised system. This is often done to disrupt the victim's operations, cover the attacker's tracks, or exert pressure on the victim.
 
 See ATT&CK: **Data Destruction ([T1485](https://attack.mitre.org/techniques/T1485/))**.
 
@@ -58,7 +58,14 @@ See ATT&CK: **Data Destruction ([T1485](https://attack.mitre.org/techniques/T148
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[delete volume shadow copies](https://github.com/mandiant/capa-rules/blob/master/impact/inhibit-system-recovery/delete-volume-shadow-copies.yml)|Data Destruction::Delete Shadow Copies (E1485.m04)| |
+|[delete volume shadow copies](https://github.com/mandiant/capa-rules/blob/master/impact/inhibit-system-recovery/delete-volume-shadow-copies.yml)|Data Destruction::Delete Shadow Copies (E1485.m04)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[clears_logs](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/clears_logs.py)|Data Destruction (E1485)|--|
+|[ransomware_recyclebin](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/ransomware_recyclebin.py)|Data Destruction (E1485)|--|
+|[uses_windows_utilities_cipher](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/windows_utilities.py)|Data Destruction (E1485)|--|
+|[anomalous_deletefile](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/anomalous_deletefile.py)|Data Destruction (E1485)|NtDeleteFile, DeleteFileW, DeleteFileA|
 
 ## References
 

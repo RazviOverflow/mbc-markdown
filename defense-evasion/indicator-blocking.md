@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,14 +21,14 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>1 March 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
 
 # Indicator Blocking
 
-Malware blocks indicators or events that would indicate malicious activity. Methods relevant to the malware domain are below. 
+Malware blocks indicators or events that would indicate malicious activity. This is achieved by blocking indicators or alerts that would typically notify users or security tools of a potential infection. This can be done in several ways, such as disabling security software, interfering with event logging, or altering system settings to suppress notifications. By blocking these indicators, the malware can continue its malicious activities without being detected. Methods relevant to the malware domain are below. 
 
 See ATT&CK: **Impair Defenses: Indicator Blocking ([T1562.006](https://attack.mitre.org/techniques/T1562/006/))**.
 
@@ -37,7 +37,6 @@ See ATT&CK: **Impair Defenses: Indicator Blocking ([T1562.006](https://attack.mi
 |Name|ID|Description|
 |---|---|---|
 |**Remove SMS Warning Messages**|F0006.001|Malware captures the message body of incoming SMS messages and aborts displaying messages that meets a certain criteria.|
-
 
 ## Use in Malware
 
@@ -48,6 +47,17 @@ See ATT&CK: **Impair Defenses: Indicator Blocking ([T1562.006](https://attack.mi
 |[**DarkComet**](../xample-malware/dark-comet.md)|2008|--|The malware can disable security center functions like anti-virus and firewall. [[3]](#3)|
 |[**TrickBot**](../xample-malware/trickbot.md)|2016|--|TrickBot terminates the following anti-malware services: Window Defender, MBamService (Malwarebytes), SAVService (Sophos AV). [[4]](#4)|
 
+## Detection
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[tampers_powershell_logging](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/tampers_powershell_logging.py)|Indicator Blocking (F0006)|--|
+|[stealth_hidden_extension](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenextension.py)|Indicator Blocking (F0006)|--|
+|[stealth_hiddenreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hiddenreg.py)|Indicator Blocking (F0006)|--|
+|[stealth_hide_notifications](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/stealth_hidenotifications.py)|Indicator Blocking (F0006)|--|
+|[creates_nullvalue](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/creates_nullvalue.py)|Indicator Blocking (F0006)|NtCreateKey, NtSetValueKey|
+|[tampers_etw](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/tampers_etw.py)|Indicator Blocking (F0006)|--|
+|[disables_wer](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_wer.py)|Indicator Blocking (F0006)|--|
 
 ## References
 

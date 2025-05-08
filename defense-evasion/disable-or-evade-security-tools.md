@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>28 April 2024</b></td>
 </tr>
 </table>
 
@@ -61,12 +61,51 @@ See ATT&CK: **Impair Defenses: Disable or Modify Tools ([T1562.001](https://atta
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[64-bit execution via heavens gate](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-disasm/64-bit-execution-via-heavens-gate.yml)|Disable or Evade Security Tools::Heavens Gate (F0004.008)| |
+|[64-bit execution via heavens gate](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-disasm/64-bit-execution-via-heavens-gate.yml)|Disable or Evade Security Tools::Heavens Gate (F0004.008)|--|
 |[patch Event Tracing for Windows function](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-av/patch-event-tracing-for-windows-function.yml)|Disable or Evade Security Tools (F0004)|kernel32.VirtualProtect, ntdll.NtProtectVirtualMemory, ZwProtectVirtualMemory|
 |[block operations on executable memory pages using Arbitrary Code Guard](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-av/block-operations-on-executable-memory-pages-using-arbitrary-code-guard.yml)|Disable or Evade Security Tools::Modify Policy (F0004.005)|SetProcessMitigationPolicy|
 |[protect spawned processes with mitigation policies](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-av/protect-spawned-processes-with-mitigation-policies.yml)|Disable or Evade Security Tools::Modify Policy (F0004.005)|UpdateProcThreadAttribute|
-|[bypass Windows File Protection](https://github.com/mandiant/capa-rules/blob/master/host-interaction/file-system/windows-file-protection/bypass-windows-file-protection.yml)|Disable or Evade Security Tools::Bypass Windows File Protection (F0004.007)| |
-|[disable driver code integrity](https://github.com/mandiant/capa-rules/blob/master/host-interaction/driver/disable-driver-code-integrity.yml)|Disable or Evade Security Tools::Disable Code Integrity (F0004.009)| |
+|[bypass Windows File Protection](https://github.com/mandiant/capa-rules/blob/master/host-interaction/file-system/windows-file-protection/bypass-windows-file-protection.yml)|Disable or Evade Security Tools::Bypass Windows File Protection (F0004.007)|--|
+|[disable driver code integrity](https://github.com/mandiant/capa-rules/blob/master/host-interaction/driver/disable-driver-code-integrity.yml)|Disable or Evade Security Tools::Disable Code Integrity (F0004.009)|--|
+|[overwrite DLL .text section to remove hooks](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/anti-av/overwrite-dll-text-section-to-remove-hooks.yml)|Disable or Evade Security Tools (F0004)|GetModuleHandle, GetModuleHandleEx|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[browser_security](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/browser_security.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_notificationcenter](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_notificationcenter.py)|Disable or Evade Security Tools (F0004)|--|
+|[clickfraud_volume](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/clickfraud_volume.py)|Disable or Evade Security Tools (F0004)|CoInternetSetFeatureEnabled|
+|[volatility_svcscan_1](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Disable or Evade Security Tools (F0004)|--|
+|[volatility_svcscan_2](https://github.com/CAPESandbox/community/tree/master/modules/signatures/all/volatility_sig.py)|Disable or Evade Security Tools (F0004)|--|
+|[antisandbox_suspend](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_suspend.py)|Disable or Evade Security Tools (F0004)|NtSuspendThread|
+|[antiav_servicestop](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_servicestop.py)|Disable or Evade Security Tools (F0004)|OpenServiceA, ControlService, OpenServiceW|
+|[disables_security](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_security.py)|Disable or Evade Security Tools (F0004)|--|
+|[antiav_whitespace](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_whitespace.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_smartscreen](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_smartscreen.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_windows_file_protection](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windows_file_protection.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_winfirewall](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_winfirewall.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_crashdumps](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_crashdumps.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_app_launch](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_app.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_app_launch](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_app.py)|Disable or Evade Security Tools::Modify Policy (F0004.005)|--|
+|[clickfraud_cookies](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/clickfraud_cookies.py)|Disable or Evade Security Tools (F0004)|InternetSetOptionA|
+|[disables_wfp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_wfp.py)|Disable or Evade Security Tools (F0004)|NtWriteFile, CopyFileA, CopyFileExW, CopyFileW|
+|[disables_wfp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_wfp.py)|Disable or Evade Security Tools::Bypass Windows File Protection (F0004.007)|NtWriteFile, CopyFileA, CopyFileExW, CopyFileW|
+|[modify_attachment_manager](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_bypass.py)|Disable or Evade Security Tools (F0004)|--|
+|[modify_attachment_manager](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_bypass.py)|Disable or Evade Security Tools::Modify Policy (F0004.005)|--|
+|[office_security](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/office_security.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_event_logging](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_event_logging.py)|Disable or Evade Security Tools (F0004)|--|
+|[antisandbox_unhook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_unhook.py)|Disable or Evade Security Tools (F0004)|--|
+|[antisandbox_unhook](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antisandbox_unhook.py)|Disable or Evade Security Tools::Unhook APIs (F0004.003)|--|
+|[modify_security_center_warnings](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/modifies_seccenter.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_wer](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_wer.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_windows_defender](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windefender.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_windows_defender_dism](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windefender.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_windows_defender_logging](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windefender.py)|Disable or Evade Security Tools (F0004)|--|
+|[removes_windows_defender_contextmenu](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windefender.py)|Disable or Evade Security Tools (F0004)|--|
+|[windows_defender_powershell](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_windefender.py)|Disable or Evade Security Tools (F0004)|--|
+|[disables_browser_warn](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/disables_browserwarn.py)|Disable or Evade Security Tools (F0004)|--|
+|[antiav_srp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_srp.py)|Disable or Evade Security Tools (F0004)|--|
+|[antiav_srp](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antiav_srp.py)|Disable or Evade Security Tools::Modify Policy (F0004.005)|--|
+|[bypass_firewall](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/bypass_firewall.py)|Disable or Evade Security Tools (F0004)|--|
 
 ## References
 

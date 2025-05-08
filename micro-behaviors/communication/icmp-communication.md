@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.1</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>5 December 2023</b></td>
 </tr>
 </table>
 
@@ -42,3 +42,8 @@ This micro-behavior is related to ICMP communication.
 |Tool: capa|Mapping|APIs|
 |---|---|---|
 |[send ICMP echo request](https://github.com/mandiant/capa-rules/blob/master/communication/icmp/send-icmp-echo-request.yml)|ICMP Communication::Echo Request (C0014.002)|IcmpSendEcho, IcmpSendEcho2, IcmpSendEcho2Ex, Icmp6SendEcho2, IcmpCreateFile, Icmp6CreateFile, IcmpCloseHandle|
+
+|Tool: CAPE|Class|Mapping|APIs|
+|---|---|---|---|
+|[network_icmp](https://github.com/CAPESandbox/community/blob/master/modules/signatures/all/network_icmp.py)|NetworkICMP|ICMP Communication (C0014)|--|
+|[suspicious_ping_use](https://github.com/CAPESandbox/community/blob/master/modules/signatures/windows/windows_utilities.py)|SuspiciousPingUse|ICMP Communication (C0014)|--|

@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,7 +21,7 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>30 April 2024</b></td>
 </tr>
 </table>
 
@@ -62,7 +62,18 @@ This behavior corresponds to simple, general discovery of analysis tools. Behavi
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[reference analysis tools strings](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/reference-analysis-tools-strings.yml)|Analysis Tool Discovery::Process detection (B0013.001)| |
+|[reference analysis tools strings](https://github.com/mandiant/capa-rules/blob/master/anti-analysis/reference-analysis-tools-strings.yml)|Analysis Tool Discovery::Process detection (B0013.001)|--|
+
+|Tool: CAPE|Mapping|APIs|
+|---|---|---|
+|[antianalysis_detectreg](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antianalysis_detectreg.py)|Analysis Tool Discovery (B0013)|--|
+|[antidebug_devices](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_devices.py)|Analysis Tool Discovery (B0013)|--|
+|[antidebug_windows](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_windows.py)|Analysis Tool Discovery (B0013)|--|
+|[antidebug_windows](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_windows.py)|Analysis Tool Discovery::Process detection (B0013.001)|--|
+|[antidebug_windows](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antidebug_windows.py)|Analysis Tool Discovery::Known Window (B0013.009)|--|
+|[antivm_bochs_keys](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antivm_bochs_keys.py)|Analysis Tool Discovery (B0013)|--|
+|[antianalysis_detectfile](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antianalysis_detectfile.py)|Analysis Tool Discovery (B0013)|--|
+|[antianalysis_detectfile](https://github.com/CAPESandbox/community/tree/master/modules/signatures/windows/antianalysis_detectfile.py)|Analysis Tool Discovery::Known File Location (B0013.008)|--|
 
 ## References
 

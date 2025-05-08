@@ -13,7 +13,7 @@
 </tr>
 <tr>
 <td><b>Version</b></td>
-<td><b>2.0</b></td>
+<td><b>2.2</b></td>
 </tr>
 <tr>
 <td><b>Created</b></td>
@@ -21,25 +21,24 @@
 </tr>
 <tr>
 <td><b>Last Modified</b></td>
-<td><b>13 September 2023</b></td>
+<td><b>29 April 2024</b></td>
 </tr>
 </table>
 
 
 # Taskbar Discovery
 
-
 ## Use in Malware
 
 |Name|Date|Method|Description|
 |---|---|---|---|
-|[**Redhip**](../xample-malware/rebhip.md)|2011|--|Redhip finds taskbars. [[1]](#1)|
+|[**Redhip**](../xample-malware/redhip.md)|2011|--|Redhip finds taskbars. [[1]](#1)|
 
 ## Detection
 
 |Tool: capa|Mapping|APIs|
 |---|---|---|
-|[find taskbar](https://github.com/mandiant/capa-rules/blob/master/host-interaction/gui/taskbar/find/find-taskbar.yml)|Taskbar Discovery (B0043)| |
+|[find taskbar](https://github.com/mandiant/capa-rules/blob/master/host-interaction/gui/taskbar/find/find-taskbar.yml)|Taskbar Discovery (B0043)|--|
 
 ## References
 
